@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réservation — Sakbé · Démo Module Premium</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { 'serif': ['Fraunces', 'serif'], 'sans': ['DM Sans', 'sans-serif'] },
+        colors: {
+          'ivory': '#FAF6F0', 'ivory-warm': '#F4ECDF', 'sand': '#E8D9C0',
+          'terracotta': '#C75D3F', 'terracotta-deep': '#9C3E25',
+          'ochre': '#D89556', 'savane': '#5C6B3F', 'lapis': '#2C5078',
+          'brass': '#B8945F', 'charcoal': '#2A1F1A',
+        }
+      }}
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .day-cell { transition: all 0.2s ease; cursor: pointer; user-select: none; }
+    .day-cell:hover:not(.disabled):not(.selected) { background: #F4ECDF; }
+    .day-cell.selected { background: #C75D3F; color: #FAF6F0; font-weight: 700; }
+    .day-cell.disabled { color: #ccc; cursor: not-allowed; opacity: .35; }
+    .time-slot, .pax-slot { transition: all 0.2s ease; cursor: pointer; }
+    .time-slot:hover, .pax-slot:hover { border-color: #C75D3F; }
+    .time-slot.selected, .pax-slot.selected { background: #C75D3F; color: #FAF6F0; border-color: #C75D3F; }
+    .step-pane { display: none; }
+    .step-pane.active { display: block; }
+  </style>
+</head>
+<body class="bg-ivory text-charcoal font-sans antialiased min-h-screen">
+
+  <!-- Banner démo -->
+  <div class="bg-terracotta text-ivory text-center py-3 px-6 text-sm">
+    <strong>Démonstration interactive · Formule Premium</strong> — Pas une vraie réservation. <a href="devis.html" class="underline hover:text-ochre">Voir le devis</a> · <a href="index.html" class="underline hover:text-ochre">Retour au site</a>
+  </div>
+
+  <!-- Header simplifié -->
+  <header class="border-b border-sand bg-ivory">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="font-serif text-2xl font-semibold text-terracotta">Sakbé</a>
+      <a href="index.html" class="text-sm text-charcoal/70 hover:text-terracotta transition flex items-center gap-1.5"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour à l'accueil</a>
+    </div>
+  </header>
+
+  <div class="max-w-5xl mx-auto px-6 py-12 md:py-16">
+
+    <header class="text-center mb-10">
+      <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Réservation en ligne</p>
+      <h1 class="font-serif text-4xl md:text-5xl text-charcoal mb-4">Réservez votre <em class="text-terracotta">table levantine</em></h1>
+      <p class="text-charcoal/70 max-w-xl mx-auto">Choisissez votre date, le nombre de convives et l'horaire. Confirmation immédiate par email.</p>
+    </header>
+
+    <!-- Étapes indicateur -->
+    <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+      <div class="bg-ivory-warm px-6 md:px-8 py-5 flex items-center justify-between border-b border-sand">
+        <div class="flex items-center gap-3" data-step-pill="1">
+          <span class="step-num w-8 h-8 bg-terracotta text-ivory rounded-full flex items-center justify-center font-medium text-sm">1</span>
+          <span class="step-label font-medium text-charcoal text-sm hidden sm:inline">Date</span>
+        </div>
+        <div class="flex-1 mx-3 h-px bg-sand"></div>
+        <div class="flex items-center gap-3" data-step-pill="2">
+          <span class="step-num w-8 h-8 bg-sand text-charcoal/60 rounded-full flex items-center justify-center font-medium text-sm">2</span>
+          <span class="step-label font-medium text-charcoal/60 text-sm hidden sm:inline">Convives & horaire</span>
+        </div>
+        <div class="flex-1 mx-3 h-px bg-sand"></div>
+        <div class="flex items-center gap-3" data-step-pill="3">
+          <span class="step-num w-8 h-8 bg-sand text-charcoal/60 rounded-full flex items-center justify-center font-medium text-sm">3</span>
+          <span class="step-label font-medium text-charcoal/60 text-sm hidden sm:inline">Coordonnées</span>
+        </div>
+      </div>
+
+      <!-- Étape 1 : Calendrier -->
+      <div class="step-pane active p-6 md:p-12" data-step="1">
+        <p class="font-serif text-2xl text-charcoal mb-2">Choisissez une date</p>
+        <p class="text-sm text-charcoal/60 mb-8">Le restaurant est fermé le lundi.</p>
+
+        <div class="bg-ivory rounded-2xl p-4 md:p-6 max-w-xl mx-auto">
+          <div class="flex items-center justify-between mb-4">
+            <button id="prev-month" class="text-charcoal/50 hover:text-terracotta p-2 rounded-lg hover:bg-ivory-warm"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+            <p id="month-label" class="font-medium text-charcoal text-lg">Mai 2026</p>
+            <button id="next-month" class="text-charcoal/50 hover:text-terracotta p-2 rounded-lg hover:bg-ivory-warm"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+          </div>
+          <div class="grid grid-cols-7 gap-1 md:gap-2 text-center mb-2">
+            <div class="text-xs text-charcoal/50 py-2 font-medium">L</div>
+            <div class="text-xs text-charcoal/50 py-2 font-medium">M</div>
+            <div class="text-xs text-charcoal/50 py-2 font-medium">M</div>
+            <div class="text-xs text-charcoal/50 py-2 font-medium">J</div>
+            <div class="text-xs text-charcoal/50 py-2 font-medium">V</div>
+            <div class="text-xs text-charcoal/50 py-2 font-medium">S</div>
+            <div class="text-xs text-charcoal/50 py-2 font-medium">D</div>
+          </div>
+          <div id="calendar-grid" class="grid grid-cols-7 gap-1 md:gap-2 text-center"></div>
+          <p id="selected-date-label" class="text-xs text-charcoal/50 mt-5 text-center">Sélectionnez un jour pour continuer</p>
+        </div>
+
+        <div class="flex justify-end mt-8">
+          <button id="next-1" disabled class="bg-terracotta text-ivory px-8 py-4 rounded-full font-medium hover:bg-terracotta-deep transition flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">Continuer <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+        </div>
+      </div>
+
+      <!-- Étape 2 : Convives + horaire -->
+      <div class="step-pane p-6 md:p-12" data-step="2">
+        <p class="font-serif text-2xl text-charcoal mb-2">Combien de convives ?</p>
+        <div class="flex items-center gap-6 mb-10">
+          <button id="pax-minus" class="w-12 h-12 rounded-full bg-ivory-warm hover:bg-sand transition flex items-center justify-center text-2xl font-medium text-charcoal">−</button>
+          <span id="pax-count" class="font-serif text-5xl text-terracotta w-16 text-center">2</span>
+          <button id="pax-plus" class="w-12 h-12 rounded-full bg-ivory-warm hover:bg-sand transition flex items-center justify-center text-2xl font-medium text-charcoal">+</button>
+          <span class="text-charcoal/60 text-sm">personnes (max 10)</span>
+        </div>
+
+        <p class="font-serif text-2xl text-charcoal mb-2">Horaire souhaité</p>
+        <p class="text-sm text-charcoal/60 mb-6" id="slots-helper">Choisissez un créneau disponible.</p>
+        <div id="time-grid" class="grid grid-cols-3 md:grid-cols-4 gap-3 mb-10"></div>
+
+        <div class="flex justify-between">
+          <button class="back-btn text-charcoal/60 hover:text-terracotta px-6 py-3 flex items-center gap-2 font-medium"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour</button>
+          <button id="next-2" disabled class="bg-terracotta text-ivory px-8 py-4 rounded-full font-medium hover:bg-terracotta-deep transition flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">Continuer <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+        </div>
+      </div>
+
+      <!-- Étape 3 : Formulaire + récap -->
+      <div class="step-pane p-6 md:p-12" data-step="3">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="md:col-span-2">
+            <p class="font-serif text-2xl text-charcoal mb-6">Vos coordonnées</p>
+            <form id="reservation-form" class="space-y-4" onsubmit="event.preventDefault(); confirmReservation();">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs uppercase tracking-wider text-charcoal/60 mb-2">Prénom</label>
+                  <input type="text" required class="w-full bg-ivory border border-sand rounded-xl px-4 py-3 focus:border-terracotta focus:outline-none transition" />
+                </div>
+                <div>
+                  <label class="block text-xs uppercase tracking-wider text-charcoal/60 mb-2">Nom</label>
+                  <input type="text" required class="w-full bg-ivory border border-sand rounded-xl px-4 py-3 focus:border-terracotta focus:outline-none transition" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-charcoal/60 mb-2">Email</label>
+                <input type="email" required class="w-full bg-ivory border border-sand rounded-xl px-4 py-3 focus:border-terracotta focus:outline-none transition" />
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-charcoal/60 mb-2">Téléphone</label>
+                <input type="tel" required class="w-full bg-ivory border border-sand rounded-xl px-4 py-3 focus:border-terracotta focus:outline-none transition" />
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-charcoal/60 mb-2">Demandes spéciales (allergies, occasion…)</label>
+                <textarea rows="3" class="w-full bg-ivory border border-sand rounded-xl px-4 py-3 focus:border-terracotta focus:outline-none transition resize-none"></textarea>
+              </div>
+              <div class="flex items-start gap-3 pt-2">
+                <input type="checkbox" id="sms-opt" class="mt-1 accent-terracotta" />
+                <label for="sms-opt" class="text-sm text-charcoal/70">Recevoir un rappel SMS la veille de ma venue</label>
+              </div>
+
+              <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6">
+                <button type="button" class="back-btn text-charcoal/60 hover:text-terracotta px-6 py-3 flex items-center gap-2 font-medium"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour</button>
+                <button type="submit" class="bg-terracotta text-ivory px-8 py-4 rounded-full font-medium hover:bg-terracotta-deep transition flex items-center gap-2">Confirmer la réservation <i data-lucide="check" class="w-4 h-4"></i></button>
+              </div>
+            </form>
+          </div>
+          <aside class="bg-charcoal text-ivory rounded-2xl p-6 h-fit md:sticky md:top-6">
+            <p class="font-sans text-xs tracking-[0.3em] uppercase text-ochre mb-4">Récapitulatif</p>
+            <div class="space-y-4 text-sm">
+              <div>
+                <p class="text-ivory/60 text-xs uppercase tracking-wider mb-1">Date</p>
+                <p id="recap-date" class="font-serif text-xl">—</p>
+              </div>
+              <div>
+                <p class="text-ivory/60 text-xs uppercase tracking-wider mb-1">Convives</p>
+                <p id="recap-pax" class="font-serif text-xl">—</p>
+              </div>
+              <div>
+                <p class="text-ivory/60 text-xs uppercase tracking-wider mb-1">Horaire</p>
+                <p id="recap-time" class="font-serif text-xl">—</p>
+              </div>
+              <div class="pt-4 border-t border-ivory/15">
+                <p class="text-ivory/60 text-xs uppercase tracking-wider mb-1">Lieu</p>
+                <p class="text-ivory text-sm">Sakbé · Av. des Martyrs 1<br/>4620 Fléron</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation modale -->
+    <div id="confirm-modal" class="fixed inset-0 bg-charcoal/80 hidden items-center justify-center z-50 p-6">
+      <div class="bg-ivory rounded-3xl p-10 max-w-md text-center shadow-2xl">
+        <div class="w-16 h-16 mx-auto mb-5 bg-savane rounded-full flex items-center justify-center">
+          <i data-lucide="check" class="w-8 h-8 text-ivory"></i>
+        </div>
+        <h3 class="font-serif text-3xl mb-3">Réservation confirmée</h3>
+        <p class="text-charcoal/70 mb-6">Démonstration : dans la version réelle, vous recevriez un email de confirmation immédiat.</p>
+        <button onclick="document.getElementById('confirm-modal').classList.add('hidden'); document.getElementById('confirm-modal').classList.remove('flex'); resetWizard();" class="bg-terracotta text-ivory px-8 py-3 rounded-full font-medium hover:bg-terracotta-deep transition">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Avantages -->
+    <div class="mt-16 grid md:grid-cols-3 gap-6">
+      <div class="bg-ivory-warm rounded-2xl p-6 text-center">
+        <div class="w-12 h-12 mx-auto mb-4 bg-terracotta rounded-full flex items-center justify-center text-ivory"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
+        <p class="font-serif text-lg mb-2">Confirmation immédiate</p>
+        <p class="text-charcoal/60 text-sm">Email automatique avec récapitulatif et plan d'accès</p>
+      </div>
+      <div class="bg-ivory-warm rounded-2xl p-6 text-center">
+        <div class="w-12 h-12 mx-auto mb-4 bg-ochre rounded-full flex items-center justify-center text-ivory"><i data-lucide="clock" class="w-6 h-6"></i></div>
+        <p class="font-serif text-lg mb-2">Disponible 24/7</p>
+        <p class="text-charcoal/60 text-sm">Plus d'appels manqués, vos clients réservent quand ils veulent</p>
+      </div>
+      <div class="bg-ivory-warm rounded-2xl p-6 text-center">
+        <div class="w-12 h-12 mx-auto mb-4 bg-savane rounded-full flex items-center justify-center text-ivory"><i data-lucide="bell" class="w-6 h-6"></i></div>
+        <p class="font-serif text-lg mb-2">Rappel SMS</p>
+        <p class="text-charcoal/60 text-sm">Réduction des no-shows grâce au rappel automatique</p>
+      </div>
+    </div>
+
+    <footer class="mt-16 text-center text-charcoal/50 text-sm">
+      <p class="italic mb-2">Cette page est un mockup. Le module sera entièrement fonctionnel dans la formule Premium.</p>
+      <p>Démo conçue par <a href="devis.html" class="text-terracotta hover:underline">Serenity Studio</a> pour Sakbé</p>
+    </footer>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const state = { date: null, pax: 2, time: null, viewMonth: null };
+    const today = new Date();
+    state.viewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    const monthNames = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    const dayNames = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+
+    // Slots par jour de la semaine (0=dim ... 6=sam) selon les horaires Sakbé
+    const slotsByDay = {
+      0: ['10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'],          // dim
+      1: [],                                                                          // lun fermé
+      2: ['11:30','12:00','12:30','13:00','13:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00'], // mar
+      3: ['11:30','12:00','12:30','13:00','13:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00'], // mer
+      4: ['11:30','12:00','12:30','13:00','13:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00'], // jeu
+      5: ['18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30'],          // ven
+      6: ['11:30','12:00','12:30','13:00','13:30','14:00','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30'] // sam
+    };
+
+    function renderCalendar() {
+      const m = state.viewMonth;
+      document.getElementById('month-label').textContent = monthNames[m.getMonth()] + ' ' + m.getFullYear();
+      const grid = document.getElementById('calendar-grid');
+      grid.innerHTML = '';
+      const firstDay = new Date(m.getFullYear(), m.getMonth(), 1);
+      const lastDay = new Date(m.getFullYear(), m.getMonth() + 1, 0);
+      // Lundi = 0
+      let leadingBlanks = (firstDay.getDay() + 6) % 7;
+      for (let i = 0; i < leadingBlanks; i++) {
+        const c = document.createElement('div');
+        c.className = 'py-3';
+        grid.appendChild(c);
+      }
+      const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const cell = document.createElement('div');
+        const dateObj = new Date(m.getFullYear(), m.getMonth(), d);
+        const isPast = dateObj < todayStart;
+        const isMonday = dateObj.getDay() === 1;
+        const disabled = isPast || isMonday;
+        cell.className = 'day-cell py-3 rounded-lg text-sm' + (disabled ? ' disabled' : '');
+        cell.textContent = d;
+        if (!disabled) {
+          cell.addEventListener('click', () => {
+            grid.querySelectorAll('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+            state.date = dateObj;
+            const label = dayNames[dateObj.getDay()] + ' ' + d + ' ' + monthNames[m.getMonth()].toLowerCase() + ' ' + m.getFullYear();
+            document.getElementById('selected-date-label').innerHTML = 'Date sélectionnée : <strong class="text-charcoal">' + label + '</strong>';
+            document.getElementById('next-1').disabled = false;
+          });
+        }
+        if (state.date && dateObj.toDateString() === state.date.toDateString()) cell.classList.add('selected');
+        grid.appendChild(cell);
+      }
+    }
+
+    document.getElementById('prev-month').addEventListener('click', () => {
+      const todayStart = new Date(today.getFullYear(), today.getMonth(), 1);
+      const prev = new Date(state.viewMonth.getFullYear(), state.viewMonth.getMonth() - 1, 1);
+      if (prev < todayStart) return;
+      state.viewMonth = prev;
+      renderCalendar();
+    });
+    document.getElementById('next-month').addEventListener('click', () => {
+      state.viewMonth = new Date(state.viewMonth.getFullYear(), state.viewMonth.getMonth() + 1, 1);
+      renderCalendar();
+    });
+
+    function renderSlots() {
+      const grid = document.getElementById('time-grid');
+      grid.innerHTML = '';
+      if (!state.date) return;
+      const slots = slotsByDay[state.date.getDay()] || [];
+      const helper = document.getElementById('slots-helper');
+      if (slots.length === 0) {
+        helper.textContent = 'Service fermé ce jour-là.';
+      } else {
+        helper.textContent = 'Créneaux du ' + dayNames[state.date.getDay()] + ' ' + state.date.getDate() + ' ' + monthNames[state.date.getMonth()].toLowerCase() + '.';
+      }
+      slots.forEach(s => {
+        const el = document.createElement('div');
+        el.className = 'time-slot border-2 border-sand py-3 rounded-xl text-center text-sm';
+        el.textContent = s;
+        el.addEventListener('click', () => {
+          grid.querySelectorAll('.time-slot.selected').forEach(c => c.classList.remove('selected'));
+          el.classList.add('selected');
+          state.time = s;
+          document.getElementById('next-2').disabled = false;
+        });
+        if (state.time === s) el.classList.add('selected');
+        grid.appendChild(el);
+      });
+      document.getElementById('next-2').disabled = !state.time;
+    }
+
+    document.getElementById('pax-minus').addEventListener('click', () => {
+      if (state.pax > 1) state.pax--;
+      document.getElementById('pax-count').textContent = state.pax;
+    });
+    document.getElementById('pax-plus').addEventListener('click', () => {
+      if (state.pax < 10) state.pax++;
+      document.getElementById('pax-count').textContent = state.pax;
+    });
+
+    function setStep(n) {
+      document.querySelectorAll('.step-pane').forEach(p => p.classList.toggle('active', p.dataset.step == n));
+      document.querySelectorAll('[data-step-pill]').forEach(pill => {
+        const num = pill.querySelector('.step-num');
+        const lbl = pill.querySelector('.step-label');
+        const idx = parseInt(pill.dataset.stepPill);
+        if (idx <= n) {
+          num.classList.remove('bg-sand','text-charcoal/60');
+          num.classList.add('bg-terracotta','text-ivory');
+          lbl.classList.remove('text-charcoal/60');
+          lbl.classList.add('text-charcoal');
+        } else {
+          num.classList.add('bg-sand','text-charcoal/60');
+          num.classList.remove('bg-terracotta','text-ivory');
+          lbl.classList.add('text-charcoal/60');
+          lbl.classList.remove('text-charcoal');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('next-1').addEventListener('click', () => { renderSlots(); setStep(2); });
+    document.getElementById('next-2').addEventListener('click', () => {
+      const dStr = dayNames[state.date.getDay()] + '. ' + state.date.getDate() + ' ' + monthNames[state.date.getMonth()].toLowerCase() + ' ' + state.date.getFullYear();
+      document.getElementById('recap-date').textContent = dStr.charAt(0).toUpperCase() + dStr.slice(1);
+      document.getElementById('recap-pax').textContent = state.pax + ' personne' + (state.pax > 1 ? 's' : '');
+      document.getElementById('recap-time').textContent = state.time;
+      setStep(3);
+    });
+    document.querySelectorAll('.back-btn').forEach(btn => btn.addEventListener('click', e => {
+      const cur = parseInt(e.currentTarget.closest('.step-pane').dataset.step);
+      setStep(cur - 1);
+    }));
+
+    function confirmReservation() {
+      const m = document.getElementById('confirm-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function resetWizard() {
+      state.date = null; state.time = null; state.pax = 2;
+      document.getElementById('pax-count').textContent = '2';
+      document.getElementById('next-1').disabled = true;
+      document.getElementById('next-2').disabled = true;
+      document.getElementById('selected-date-label').textContent = 'Sélectionnez un jour pour continuer';
+      document.getElementById('reservation-form').reset();
+      renderCalendar();
+      setStep(1);
+    }
+
+    renderCalendar();
+  </script>
+</body>
+</html>

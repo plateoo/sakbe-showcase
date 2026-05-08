@@ -53,10 +53,29 @@
       white-space: nowrap;
       transition: all 0.2s;
     }
-    .menu-pill:hover, .menu-pill.active {
+    .menu-pill:hover, .menu-pill.active-section {
       background: #C9A063;
       color: #0D0908;
     }
+
+    .filter-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 0.5px solid rgba(201, 160, 99, 0.3);
+      color: #C9A063;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      transition: all 0.2s;
+      cursor: pointer;
+      background: transparent;
+    }
+    .filter-pill:hover { border-color: rgba(201, 160, 99, 0.7); }
+    .filter-pill.active {
+      background: #C9A063;
+      color: #0D0908;
+      border-color: #C9A063;
+    }
+
     .dish-row {
       display: flex;
       align-items: baseline;
@@ -99,7 +118,49 @@
     .menu-section {
       padding: 56px 0;
       border-bottom: 1px solid rgba(201, 160, 99, 0.1);
-      scroll-margin-top: 140px;
+      scroll-margin-top: 200px;
+    }
+
+    .dish-card {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .dish-card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dish-card.hidden { display: none; }
+    .dish-card.featured .dish-name::after {
+      content: " ✦";
+      color: #C9A063;
+      font-size: 14px;
+    }
+
+    .dish-photo-popup {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 160, 99, 0.5);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 60;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+    .dish-photo-popup img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.85) contrast(1.05);
+    }
+    .dish-card[data-photo]:hover .dish-photo-popup { opacity: 1; }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #C9BFB0;
+      font-style: italic;
     }
 
     .stamp-wrap {
@@ -169,7 +230,7 @@
     <p class="text-ivory-dim max-w-xl mx-auto leading-relaxed">Mezzés à partager, grillades à la braise, plats signatures et douceurs levantines. Tout est préparé frais, chaque jour, à base de produits sélectionnés.</p>
   </section>
 
-  <!-- Sticky pills nav -->
+  <!-- Pills nav (catégories) -->
   <div class="menu-nav">
     <div class="max-w-6xl mx-auto px-6 py-4 flex gap-3 overflow-x-auto">
       <a href="#mezzes-froids" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Mezzés froids</a>
@@ -183,393 +244,100 @@
     </div>
   </div>
 
+  <!-- Filters -->
+  <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center">
+    <div class="relative flex-1 max-w-md">
+      <input id="menu-search" type="search" placeholder="Rechercher un plat…"
+             class="w-full bg-ember border border-brass/20 rounded-full px-5 py-3 text-sm text-ivory placeholder-ivory-dim focus:outline-none focus:border-brass/60 transition">
+    </div>
+    <div class="flex flex-wrap gap-2" id="allergen-filters">
+      <button data-allergen="vegan" class="filter-pill">Vegan</button>
+      <button data-allergen="vegetarien" class="filter-pill">Végétarien</button>
+      <button data-allergen="halal" class="filter-pill">Halal</button>
+      <button data-allergen="sans-gluten" class="filter-pill">Sans gluten</button>
+      <button data-allergen="sans-lactose" class="filter-pill">Sans lactose</button>
+      <button id="reset-filters" class="filter-pill" style="border-color: rgba(201,191,176,0.3); color: #C9BFB0;">Réinitialiser</button>
+    </div>
+  </div>
+
+  <!-- Empty state (hidden by default) -->
+  <div id="no-results" class="empty-state hidden">
+    <p class="text-lg mb-2">Aucun plat ne correspond à votre recherche.</p>
+    <p class="text-sm">Essayez d'effacer la recherche ou les filtres.</p>
+  </div>
+
   <main>
 
-    <!-- I · Mezzés froids -->
-    <section id="mezzes-froids" class="menu-section">
+    <section id="mezzes-froids" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">I · Mezzés froids</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">L'entrée en matière</h2>
-        <p class="text-ivory-dim mb-10 text-sm">À partager, frais et lumineux.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Houmous</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
-            <p class="dish-desc">Houmous crémeux à base de pois chiches et tahini, agrémenté d'huile d'olive de qualité, servi avec du pain oriental chaud.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Baba Ganoush</span><div class="dish-leader"></div><span class="dish-price">6,50 €</span></div>
-            <p class="dish-desc">Purée d'aubergines grillées, tahini, citron et huile d'olive, servie avec du pain syrio-libanais chaud.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Caviar d'aubergine (Moutable)</span><div class="dish-leader"></div><span class="dish-price">7,00 €</span></div>
-            <p class="dish-desc">Aubergines frites mélangées à du tahini, du jus de citron et de l'ail, pour une purée onctueuse et savoureuse.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Mouhamara</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
-            <p class="dish-desc">Tartinade de poivrons rouges grillés, noix concassées, mélasse de grenade et chapelure, parfumée aux épices.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Yalnji</span><div class="dish-leader"></div><span class="dish-price">5,50 €</span></div>
-            <p class="dish-desc">Délice d'héritage ottoman : feuilles de vigne roulées à la main, farcies de riz parfumé aux herbes et nappées d'huile d'olive.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Fattouch</span><div class="dish-leader"></div><span class="dish-price">7,00 €</span></div>
-            <p class="dish-desc">Salade colorée de légumes frais (salade, tomate, concombre), agrémentée de croûtons de pain libanais croustillants pour une texture et un goût uniques.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Taboulé</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
-            <p class="dish-desc">Salade fraîche à base de persil, menthe, tomates et oignons, enrichie de boulghour et assaisonnée d'huile d'olive et de jus de citron.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Kisir</span><div class="dish-leader"></div><span class="dish-price">6,50 €</span></div>
-            <p class="dish-desc">Salade turque à base de boulghour fin, tomates, oignons rouges, menthe, citron, concentré de tomate et épices.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Salade aux betteraves</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div>
-            <p class="dish-desc">Betteraves fondantes finement assaisonnées, relevées d'herbes fraîches, pour une note élégante et colorée dans l'assiette.</p>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Salade Grecque</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
-            <p class="dish-desc">Un classique méditerranéen : tomates, concombres, feta et olives noires, relevés d'origan et d'huile d'olive, pour un voyage gourmand en Grèce.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Salade au Yaourt</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
-            <p class="dish-desc">Préparation traditionnelle à base de yaourt onctueux, concombre et menthe fraîche, idéale pour accompagner des plats épicés.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- II · Mezzés chauds -->
-    <section id="mezzes-chauds" class="menu-section">
+    <section id="mezzes-chauds" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">II · Mezzés chauds</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Petits feux</h2>
-        <p class="text-ivory-dim mb-10 text-sm">Bouchées chaudes, herbes et épices.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Falafel</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div>
-            <p class="dish-desc">Falafels végétariens croustillants à base de pois chiches et d'épices, servis par 2 avec une sauce au sésame.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans gluten</span><span class="allergen">Sans lactose</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Kebbé</span><div class="dish-leader"></div><span class="dish-price">2,50 €</span></div>
-            <p class="dish-desc">Boulettes de viande hachée aux épices, enrobées de blé concassé et frites, dorées et croustillantes à l'extérieur, tendres à l'intérieur, servies à l'unité.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Cheese Samoussa</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
-            <p class="dish-desc">Samoussas croustillants au fromage fondant épicé, servis par 2 pièces.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Samoussa aux légumes</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
-            <p class="dish-desc">Samoussas croustillants, servis par 2 pièces.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Samoussa au poulet</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
-            <p class="dish-desc">Samoussas croustillants, servis par 2 pièces.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Fatteh d'Aubergines (Fatteh Makdous)</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
-            <p class="dish-desc">Aubergines rôties sur pain libanais grillé, garnies de yaourt à l'ail, viande hachée et pignons grillés, un plat savoureux aux textures croustillantes et onctueuses.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Moujadara</span><div class="dish-leader"></div><span class="dish-price">5,50 €</span></div>
-            <p class="dish-desc">Mélange de lentilles et boulgour, garni d'oignons frits croustillants, un plat végétarien savoureux et équilibré.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Waffle Fries</span><div class="dish-leader"></div><span class="dish-price">6,00 €</span></div>
-            <p class="dish-desc">Savoureuses waffle fries, gaufres de pommes de terre croustillantes aux épices maison, idéales même en livraison.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Frites épicées</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
-            <p class="dish-desc">Croustillantes aux épices maison.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Riz Sakbé</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div>
-            <p class="dish-desc">Une généreuse portion de riz à grains longs, parfaitement cuit et épicé.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Soupe de lentilles</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
-          </div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- III · Sakbé Grillades -->
-    <section id="grillades" class="menu-section">
+    <section id="grillades" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">III · Sakbé grillades</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">À la braise</h2>
-        <p class="text-ivory-dim mb-4 text-sm">Service de 18h à 22h.</p>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-4 text-sm"></p>
         <p class="text-ivory-dim italic mb-10 text-sm border-l-2 border-brass/40 pl-4 max-w-2xl">Toutes nos grillades sont servies avec riz parfumé, salade coleslaw, sauce à l'ail, biwaz, waffle fries et pain syro-libanais à la muhammara (crème de poivrons rouges grillés).</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Ailes de Poulet</span><div class="dish-leader"></div><span class="dish-price">15,50 €</span></div>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Shich Tawok</span><div class="dish-leader"></div><span class="dish-price">17,50 €</span></div>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé 1/2 poulet rôti</span><div class="dish-leader"></div><span class="dish-price">18,00 €</span></div>
-            <p class="dish-desc">Demi-poulet rôti, frites épicées croustillantes, sauce coleslaw et sauce à l'ail.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Kabab</span><div class="dish-leader"></div><span class="dish-price">18,50 €</span></div>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Brochette de Bœuf</span><div class="dish-leader"></div><span class="dish-price">19,00 €</span></div>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Côte d'agneau</span><div class="dish-leader"></div><span class="dish-price">22,00 €</span></div>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Mixte</span><div class="dish-leader"></div><span class="dish-price">27,00 €</span></div>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-        </div>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- IV · Saveurs authentiques -->
-    <section id="signatures" class="menu-section">
+    <section id="signatures" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">IV · Saveurs authentiques</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Les signatures</h2>
-        <p class="text-ivory-dim mb-10 text-sm">Les classiques de la maison, ceux qu'on revient chercher.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Maqlouba</span><div class="dish-leader"></div><span class="dish-price">17,50 €</span></div>
-            <p class="dish-desc">Plat traditionnel de riz parfumé, bœuf tendre, aubergines grillées et épices, cuit en marmite et servi avec une salade de yaourt au concombre. Une version végane est également disponible.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Mahndi Bœuf</span><div class="dish-leader"></div><span class="dish-price">19,00 €</span></div>
-            <p class="dish-desc">Bœuf tendre mijoté lentement, servi avec un riz parfumé aux épices orientales, légèrement fumé au charbon, et accompagné d'une sauce maison.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Mahndi Poulet</span><div class="dish-leader"></div><span class="dish-price">18,00 €</span></div>
-            <p class="dish-desc">Servi avec riz parfumé aux épices orientales, légèrement fumé au charbon, et accompagné d'une sauce maison.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Crispy</span><div class="dish-leader"></div><span class="dish-price">13,50 €</span></div>
-            <p class="dish-desc">Poulet mariné croustillant fait maison, servi avec sauce maison et waffle fries.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Shawrma</span><div class="dish-leader"></div><span class="dish-price">14,00 €</span></div>
-            <p class="dish-desc">Poulet mariné grillé dans un pain syro-libanais, avec pickles, sauce à l'ail et waffle fries croustillantes.</p>
-            <div><span class="allergen">Halal</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sakbé Falafel</span><div class="dish-leader"></div><span class="dish-price">12,50 €</span></div>
-            <p class="dish-desc">Quatre falafels maison croustillants, accompagnés de sauce au sésame, houmous et légumes frais.</p>
-            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
-          </div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- V · Sauces maison -->
-    <section id="sauces" class="menu-section">
+    <section id="sauces" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">V · Sauces maison</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Les compagnons</h2>
-        <p class="text-ivory-dim mb-10 text-sm">Faites le matin, pour accompagner.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sauce coleslaw</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
-            <p class="dish-desc">Faite maison.</p>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sauce Ail</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
-            <p class="dish-desc">Faite maison.</p>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sauce Sésame</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
-            <p class="dish-desc">Faite maison.</p>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Spicy Sauce</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
-            <p class="dish-desc">Faite maison.</p>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sauce Mayo</span><div class="dish-leader"></div><span class="dish-price">1,00 €</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Sauce ketchup</span><div class="dish-leader"></div><span class="dish-price">1,00 €</span></div>
-          </div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- VI · Mocktails -->
-    <section id="mocktails" class="menu-section">
+    <section id="mocktails" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">VI · Mocktails</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Sans alcool</h2>
-        <p class="text-ivory-dim mb-10 text-sm">À siroter lentement, comme il se doit.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div><div class="dish-row"><span class="dish-name">Mojito Classique</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Tropical Mocktail</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Violete</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Sunny Pêche</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Strawberry Mocktail</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Mangue Mocktail</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Pastèque Mocktail</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Piña Colada</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Piña Colada à la fraise</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Piña Colada Passion</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Piña Colada Mangue</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Ice-Tea Fraise Maison</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Ice-Tea Pêche Maison</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Ice-Tea Mangue Maison</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div></div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- VII · Boissons -->
-    <section id="boissons" class="menu-section">
+    <section id="boissons" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">VII · Boissons</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Pour étancher</h2>
-        <p class="text-ivory-dim mb-10 text-sm">Classiques et traditionnelles.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Ayran</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
-            <p class="dish-desc">Boisson traditionnelle au yaourt, délicatement salée, offrant une fraîcheur subtile qui sublime les plats épicés et les grillades.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div><div class="dish-row"><span class="dish-name">Jus d'orange pressé</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Cola</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Cola Zéro</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Cola Melon</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Spa Orange</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Eau plate 1/2 L</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div></div>
-          <div><div class="dish-row"><span class="dish-name">Eau pétillante 1/2 L</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div></div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
-    <!-- VIII · Desserts -->
-    <section id="desserts" class="menu-section">
+    <section id="desserts" class="menu-section" data-category-section>
       <div class="max-w-5xl mx-auto px-6">
-        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">VIII · Desserts</p>
-        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">La douceur</h2>
-        <p class="text-ivory-dim mb-10 text-sm">Pour finir comme à la maison.</p>
-
-        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Riz au Lait</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
-            <p class="dish-desc">Riz au lait parfumé à la fleur d'oranger et garni de pistaches croquantes.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Feuilletés à la crème (warbat bil ashta)</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
-            <p class="dish-desc">Un feuilleté croustillant, garni d'une crème pâtissière et parsemé de pistaches croquantes, pour une douceur raffinée et gourmande.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Knafeh</span><div class="dish-leader"></div><span class="dish-price">7,00 €</span></div>
-            <p class="dish-desc">Pâte de kataïf dorée et croustillante, fourrée de crème, nappée de sirop à la fleur d'oranger et parsemée de pistaches — كنافة</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-          <div>
-            <div class="dish-row"><span class="dish-name">Basbousa</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div>
-            <p class="dish-desc">Gâteau de semoule imbibé de sirop parfumé, garni de noix de coco et de pistaches.</p>
-            <div><span class="allergen">Végétarien</span></div>
-          </div>
-
-        </div>
+        <p class="cat-eyebrow text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;"></p>
+        <h2 class="cat-title text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;"></h2>
+        <p class="cat-subtitle text-ivory-dim mb-10 text-sm"></p>
+        <div class="dishes-grid grid md:grid-cols-2 gap-x-12 gap-y-8"></div>
       </div>
     </section>
 
@@ -620,20 +388,172 @@
     </div>
   </footer>
 
+  <script src="js/menu-data.js"></script>
   <script>
-    lucide.createIcons();
-    // Highlight active pill on scroll
-    const pills = document.querySelectorAll('.menu-pill');
-    const sections = document.querySelectorAll('main section[id]');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          pills.forEach(p => p.classList.toggle('active', p.getAttribute('href') === '#' + id));
-        }
+    (function() {
+      const STORAGE_KEY = 'sakbe-menu-v1';
+
+      function loadData() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed.version === window.SAKBE_MENU.version) return parsed;
+          }
+        } catch (e) {}
+        return window.SAKBE_MENU;
+      }
+
+      const data = loadData();
+      const activeAllergens = new Set();
+      let searchQuery = '';
+
+      const ALLERGEN_LABELS = {
+        vegan: 'Vegan',
+        vegetarien: 'Végétarien',
+        halal: 'Halal',
+        'sans-gluten': 'Sans gluten',
+        'sans-lactose': 'Sans lactose'
+      };
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function dishHTML(dish) {
+        const photo = dish.photo
+          ? `<div class="dish-photo-popup hidden md:block"><img src="${escapeHtml(dish.photo)}" alt="${escapeHtml(dish.name)}" loading="lazy"></div>`
+          : '';
+        const allergens = (dish.allergens || []).map(a =>
+          `<span class="allergen">${escapeHtml(ALLERGEN_LABELS[a] || a)}</span>`
+        ).join('');
+        const searchKey = (dish.name + ' ' + (dish.desc || '')).toLowerCase();
+        return `
+          <div class="dish-card relative ${dish.featured ? 'featured' : ''}"
+               data-id="${escapeHtml(dish.id)}"
+               data-allergens="${(dish.allergens || []).join(',')}"
+               data-search="${escapeHtml(searchKey)}"
+               ${dish.photo ? `data-photo="${escapeHtml(dish.photo)}"` : ''}>
+            <div class="dish-row">
+              <span class="dish-name">${escapeHtml(dish.name)}</span>
+              <div class="dish-leader"></div>
+              <span class="dish-price">${dish.price.toFixed(2).replace('.', ',')} €</span>
+            </div>
+            ${dish.desc ? `<p class="dish-desc">${escapeHtml(dish.desc)}</p>` : ''}
+            ${allergens ? `<div>${allergens}</div>` : ''}
+            ${photo}
+          </div>`;
+      }
+
+      function render() {
+        data.categories.forEach(cat => {
+          const section = document.getElementById(cat.id);
+          if (!section) return;
+          section.querySelector('.cat-eyebrow').textContent = cat.roman + ' · ' + cat.name;
+          section.querySelector('.cat-title').textContent = cat.name;
+          const sub = section.querySelector('.cat-subtitle');
+          if (cat.subtitle) {
+            sub.textContent = cat.subtitle;
+            sub.style.display = '';
+          } else {
+            sub.style.display = 'none';
+          }
+          const grid = section.querySelector('.dishes-grid');
+          const dishes = data.dishes.filter(d => d.category === cat.id && d.available !== false);
+          grid.innerHTML = dishes.map(dishHTML).join('');
+        });
+        applyFilters();
+        observeCards();
+      }
+
+      function applyFilters() {
+        let totalVisible = 0;
+        document.querySelectorAll('.dish-card').forEach(card => {
+          const cardAllergens = (card.dataset.allergens || '').split(',').filter(Boolean);
+          const matchesAllergen = activeAllergens.size === 0 ||
+            [...activeAllergens].every(a => cardAllergens.includes(a));
+          const matchesSearch = !searchQuery ||
+            card.dataset.search.includes(searchQuery);
+          const visible = matchesAllergen && matchesSearch;
+          card.classList.toggle('hidden', !visible);
+          if (visible) totalVisible++;
+        });
+        document.querySelectorAll('[data-category-section]').forEach(sec => {
+          const visibleCards = sec.querySelectorAll('.dish-card:not(.hidden)').length;
+          sec.style.display = visibleCards === 0 ? 'none' : '';
+        });
+        const empty = document.getElementById('no-results');
+        if (empty) empty.classList.toggle('hidden', totalVisible > 0);
+      }
+
+      function observeCards() {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in-view');
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.dish-card:not(.in-view)').forEach(c => obs.observe(c));
+      }
+
+      // Filter pills
+      document.querySelectorAll('#allergen-filters [data-allergen]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const a = btn.dataset.allergen;
+          if (activeAllergens.has(a)) {
+            activeAllergens.delete(a);
+            btn.classList.remove('active');
+          } else {
+            activeAllergens.add(a);
+            btn.classList.add('active');
+          }
+          applyFilters();
+        });
       });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    sections.forEach(s => observer.observe(s));
+      document.getElementById('reset-filters').addEventListener('click', () => {
+        activeAllergens.clear();
+        searchQuery = '';
+        document.getElementById('menu-search').value = '';
+        document.querySelectorAll('#allergen-filters .active').forEach(b => b.classList.remove('active'));
+        applyFilters();
+      });
+
+      // Search
+      document.getElementById('menu-search').addEventListener('input', e => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        applyFilters();
+      });
+
+      // Photo popup follow cursor (desktop)
+      document.addEventListener('mousemove', e => {
+        const card = e.target.closest('.dish-card[data-photo]');
+        if (!card) return;
+        const popup = card.querySelector('.dish-photo-popup');
+        if (!popup) return;
+        const rect = card.getBoundingClientRect();
+        popup.style.left = (e.clientX - rect.left + 20) + 'px';
+        popup.style.top = (e.clientY - rect.top - 100) + 'px';
+      });
+
+      // Active section highlight in sticky pills nav
+      const sectionObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            document.querySelectorAll('.menu-pill').forEach(p => p.classList.remove('active-section'));
+            const pill = document.querySelector('.menu-pill[href="#' + e.target.id + '"]');
+            if (pill) pill.classList.add('active-section');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      document.querySelectorAll('[data-category-section]').forEach(s => sectionObs.observe(s));
+
+      lucide.createIcons && lucide.createIcons();
+      render();
+    })();
   </script>
 </body>
 </html>

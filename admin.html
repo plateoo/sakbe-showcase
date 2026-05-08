@@ -64,6 +64,37 @@
       line-height: 1;
       display: block;
     }
+    .editable {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #F4ECDF;
+      padding: 6px 8px;
+      border-radius: 6px;
+      width: 100%;
+      font-family: inherit;
+      font-size: 13px;
+    }
+    .editable:hover { border-color: rgba(201, 160, 99, 0.2); }
+    .editable:focus {
+      border-color: rgba(201, 160, 99, 0.6);
+      background: rgba(13, 9, 8, 0.5);
+      outline: none;
+    }
+    .editable.modified { border-color: #D26A4B; background: rgba(210,106,75,0.05); }
+    #dishes-tbody tr { border-top: 1px solid rgba(201, 160, 99, 0.08); }
+    #dishes-tbody tr:hover { background: rgba(201, 160, 99, 0.03); }
+    .toggle-switch {
+      width: 40px; height: 22px; border-radius: 999px;
+      background: rgba(255,255,255,0.1); position: relative;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .toggle-switch.on { background: #C9A063; }
+    .toggle-switch::after {
+      content: ''; position: absolute; top: 3px; left: 3px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #F4ECDF; transition: left 0.2s;
+    }
+    .toggle-switch.on::after { left: 21px; background: #0D0908; }
   </style>
 </head>
 <body class="bg-midnight text-ivory font-sans antialiased min-h-screen">
@@ -119,7 +150,7 @@
             <p class="text-xs tracking-[0.2em] uppercase text-brass">Plats actifs</p>
             <div class="w-9 h-9 rounded-lg bg-terracotta/15 flex items-center justify-center text-terracotta"><i data-lucide="utensils-crossed" class="w-4 h-4"></i></div>
           </div>
-          <p class="font-serif text-4xl text-ivory">24</p>
+          <p class="font-serif text-4xl text-ivory" data-stat="dishes-active">24</p>
           <p class="text-xs text-brass-glow mt-1">+ 2 ce mois-ci</p>
         </div>
         <div class="bg-ember border border-brass/15 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/30">
@@ -148,95 +179,40 @@
         </div>
       </section>
 
-      <!-- Carte -->
+      <!-- Carte (gestionnaire dynamique) -->
       <section id="carte" class="mb-12">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
           <div>
-            <h2 class="font-serif text-2xl mb-1 text-ivory">Carte du restaurant</h2>
-            <p class="text-sm text-ivory-dim">Gérez vos plats, prix, photos et disponibilité.</p>
+            <h2 class="text-2xl mb-1 text-ivory" style="font-family:'Fraunces',serif;">Gestion de la carte</h2>
+            <p class="text-ivory-dim text-sm">Modifications appliquées en direct sur la page menu publique.</p>
           </div>
-          <button class="bg-terracotta text-midnight px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-terracotta-deep hover:text-ivory transition flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter un plat</button>
+          <div class="flex gap-3 flex-wrap">
+            <select id="filter-cat" class="bg-ember border border-brass/20 rounded-lg px-3 py-2 text-sm text-ivory">
+              <option value="">Toutes catégories</option>
+            </select>
+            <button id="reset-menu" class="px-4 py-2 rounded-lg border border-ivory-dim/30 text-ivory-dim hover:border-ivory-dim text-sm transition">Réinitialiser</button>
+            <a href="menu.html" target="_blank" class="px-4 py-2 rounded-lg bg-brass text-midnight font-semibold text-sm hover:bg-brass-glow transition">Voir le menu public ↗</a>
+          </div>
         </div>
 
-        <div class="bg-midnight rounded-2xl overflow-hidden border border-brass/15 shadow-2xl shadow-black/40">
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm min-w-[720px]">
-              <thead class="bg-black text-brass text-xs uppercase tracking-wider">
-                <tr>
-                  <th class="text-left py-3 px-5">Plat</th>
-                  <th class="text-left py-3 px-5">Catégorie</th>
-                  <th class="text-left py-3 px-5">Prix</th>
-                  <th class="text-left py-3 px-5">Statut</th>
-                  <th class="text-right py-3 px-5">Actions</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-brass/10 [&_tr:nth-child(even)]:bg-ember">
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/taboule.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Taboulé</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
-                  <td class="py-3 px-5 font-medium">9,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/houmous.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Houmous</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
-                  <td class="py-3 px-5 font-medium">8,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/falafel.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Falafel</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze chaud</td>
-                  <td class="py-3 px-5 font-medium">7,50 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/fatoush.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Fatoush</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Salade</td>
-                  <td class="py-3 px-5 font-medium">10,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/kebbe.png" class="w-10 h-10 rounded-lg object-contain bg-charcoal" alt=""/><span class="font-medium text-ivory">Kebbé</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze chaud</td>
-                  <td class="py-3 px-5 font-medium">11,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/ganoush.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Baba Ganoush</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
-                  <td class="py-3 px-5 font-medium">8,50 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/crispy.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Crispy</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze chaud</td>
-                  <td class="py-3 px-5 font-medium">9,50 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-charcoal flex items-center justify-center text-ivory/30"><i data-lucide="image" class="w-4 h-4"></i></div><span class="font-medium">Mouhammara</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
-                  <td class="py-3 px-5 font-medium">9,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-oxblood/30 text-ivory-dim px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-ivory/40"></span> Indisponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-                <tr class="hover:bg-charcoal transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-charcoal flex items-center justify-center text-ivory/30"><i data-lucide="image" class="w-4 h-4"></i></div><span class="font-medium">Knefé</span></td>
-                  <td class="py-3 px-5 text-ivory-dim">Dessert</td>
-                  <td class="py-3 px-5 font-medium">7,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div id="save-indicator" class="hidden mb-4 px-4 py-2 rounded-lg bg-brass/10 border border-brass/30 text-brass text-sm">
+          ✓ Modifications enregistrées — actualise le menu public pour les voir
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-brass/15 bg-midnight">
+          <table class="w-full text-sm min-w-[920px]">
+            <thead class="bg-charcoal text-brass text-xs uppercase tracking-wider">
+              <tr>
+                <th class="text-left p-3 font-normal">Dispo</th>
+                <th class="text-left p-3 font-normal">Plat</th>
+                <th class="text-left p-3 font-normal">Description</th>
+                <th class="text-left p-3 font-normal">Prix (€)</th>
+                <th class="text-left p-3 font-normal">Catégorie</th>
+                <th class="text-left p-3 font-normal">Allergènes</th>
+              </tr>
+            </thead>
+            <tbody id="dishes-tbody"></tbody>
+          </table>
         </div>
       </section>
 
@@ -334,5 +310,118 @@
   </div>
 
   <script>lucide.createIcons();</script>
+
+  <!-- Menu data + admin editor -->
+  <script src="js/menu-data.js"></script>
+  <script>
+    (function() {
+      const STORAGE_KEY = 'sakbe-menu-v1';
+
+      function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
+
+      function loadData() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed.version === window.SAKBE_MENU.version) return parsed;
+          }
+        } catch (e) {}
+        return deepClone(window.SAKBE_MENU);
+      }
+
+      function save(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        const ind = document.getElementById('save-indicator');
+        ind.classList.remove('hidden');
+        clearTimeout(save._t);
+        save._t = setTimeout(() => ind.classList.add('hidden'), 3000);
+        updateStat();
+      }
+
+      function updateStat() {
+        const el = document.querySelector('[data-stat="dishes-active"]');
+        if (el) el.textContent = data.dishes.filter(d => d.available !== false).length;
+      }
+
+      function escapeAttr(s) {
+        return String(s == null ? '' : s).replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      }
+
+      let data = loadData();
+      let filterCat = '';
+
+      function rowHTML(dish, idx) {
+        const cats = data.categories.map(c =>
+          `<option value="${c.id}" ${c.id === dish.category ? 'selected' : ''}>${escapeAttr(c.name)}</option>`
+        ).join('');
+        const isOn = dish.available !== false;
+        return `
+          <tr data-idx="${idx}">
+            <td class="p-3"><div class="toggle-switch ${isOn ? 'on' : ''}" data-field="available" role="switch" aria-checked="${isOn}"></div></td>
+            <td class="p-3 min-w-[180px]"><input class="editable" data-field="name" value="${escapeAttr(dish.name)}"></td>
+            <td class="p-3 min-w-[280px]"><input class="editable" data-field="desc" value="${escapeAttr(dish.desc || '')}" placeholder="—"></td>
+            <td class="p-3 w-24"><input class="editable" data-field="price" value="${dish.price.toFixed(2).replace('.', ',')}" inputmode="decimal"></td>
+            <td class="p-3"><select class="editable" data-field="category">${cats}</select></td>
+            <td class="p-3 text-xs text-ivory-dim">${(dish.allergens || []).join(', ') || '—'}</td>
+          </tr>`;
+      }
+
+      function render() {
+        const sel = document.getElementById('filter-cat');
+        sel.innerHTML = '<option value="">Toutes catégories</option>' +
+          data.categories.map(c => `<option value="${c.id}" ${c.id === filterCat ? 'selected' : ''}>${escapeAttr(c.name)}</option>`).join('');
+
+        const tbody = document.getElementById('dishes-tbody');
+        const rows = data.dishes
+          .map((d, i) => ({ d, i }))
+          .filter(({ d }) => !filterCat || d.category === filterCat);
+        tbody.innerHTML = rows.map(({ d, i }) => rowHTML(d, i)).join('');
+
+        tbody.querySelectorAll('.editable').forEach(input => {
+          input.addEventListener('change', () => {
+            const tr = input.closest('tr');
+            const idx = parseInt(tr.dataset.idx, 10);
+            const field = input.dataset.field;
+            let val = input.value;
+            if (field === 'price') {
+              val = parseFloat(String(val).replace(',', '.'));
+              if (isNaN(val) || val < 0) val = 0;
+              input.value = val.toFixed(2).replace('.', ',');
+            }
+            data.dishes[idx][field] = val;
+            input.classList.add('modified');
+            save(data);
+          });
+        });
+
+        tbody.querySelectorAll('.toggle-switch').forEach(t => {
+          t.addEventListener('click', () => {
+            const idx = parseInt(t.closest('tr').dataset.idx, 10);
+            data.dishes[idx].available = data.dishes[idx].available === false ? true : false;
+            t.classList.toggle('on', data.dishes[idx].available !== false);
+            t.setAttribute('aria-checked', data.dishes[idx].available !== false);
+            save(data);
+          });
+        });
+
+        updateStat();
+      }
+
+      document.getElementById('filter-cat').addEventListener('change', e => {
+        filterCat = e.target.value;
+        render();
+      });
+
+      document.getElementById('reset-menu').addEventListener('click', () => {
+        if (!confirm("Réinitialiser tous les plats aux valeurs d'origine ? Les modifications locales seront perdues.")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        data = loadData();
+        render();
+      });
+
+      render();
+    })();
+  </script>
 </body>
 </html>

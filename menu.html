@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La carte — Sakbé · Cuisine levantine à Liège</title>
+  <meta name="description" content="La carte complète de Sakbé : mezzés froids et chauds, grillades à la braise, signatures, mocktails et desserts levantins. À Fléron, Liège." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: {
+          'serif': ['Fraunces', 'serif'],
+          'sans': ['DM Sans', 'sans-serif'],
+          'arabic': ['Amiri', 'serif'],
+        },
+        colors: {
+          'midnight': '#0D0908', 'ember': '#1C1410', 'charcoal': '#2A1F1A',
+          'terracotta': '#D26A4B', 'terracotta-deep': '#9C3E25',
+          'brass': '#C9A063', 'brass-glow': '#E5C089',
+          'ochre': '#D89556', 'oxblood': '#5A1F1A', 'lapis': '#2C5078',
+          'ivory': '#F4ECDF', 'ivory-dim': '#C9BFB0', 'sand': '#E8D9C0',
+        }
+      }}
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .ar-accent { font-family: 'Amiri', serif; font-weight: 700; }
+
+    .menu-nav {
+      position: sticky;
+      top: 64px;
+      z-index: 30;
+      background: rgba(13, 9, 8, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201, 160, 99, 0.15);
+    }
+    .menu-pill {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 0.5px solid rgba(201, 160, 99, 0.35);
+      color: #C9A063;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .menu-pill:hover, .menu-pill.active {
+      background: #C9A063;
+      color: #0D0908;
+    }
+    .dish-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .dish-leader {
+      flex: 1;
+      border-bottom: 0.5px dotted rgba(201, 160, 99, 0.3);
+      transform: translateY(-4px);
+    }
+    .dish-name {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      color: #F4ECDF;
+    }
+    .dish-price {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      color: #C9A063;
+    }
+    .dish-desc {
+      font-size: 13px;
+      color: #C9BFB0;
+      line-height: 1.55;
+      margin-bottom: 10px;
+      max-width: 460px;
+    }
+    .allergen {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(201, 160, 99, 0.08);
+      color: #C9A063;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      margin-right: 6px;
+      border: 0.5px solid rgba(201, 160, 99, 0.2);
+    }
+    .menu-section {
+      padding: 56px 0;
+      border-bottom: 1px solid rgba(201, 160, 99, 0.1);
+      scroll-margin-top: 140px;
+    }
+
+    .stamp-wrap {
+      transform: rotate(-2deg);
+      transition: transform 0.4s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .stamp-wrap:hover { transform: rotate(0deg); }
+    .stamp-frame {
+      padding: 3px;
+      border: 0.5px solid rgba(201, 160, 99, 0.45);
+      border-radius: 6px;
+    }
+    .stamp-inner {
+      border: 0.5px solid rgba(201, 160, 99, 0.65);
+      padding: 11px 22px 13px;
+      border-radius: 3px;
+      text-align: center;
+    }
+    .stamp-eyebrow {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 11px;
+      color: #C9A063;
+      letter-spacing: 0.32em;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .stamp-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      color: #E5C089;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-midnight text-ivory font-sans antialiased">
+
+  <!-- Header sticky -->
+  <header class="sticky top-0 z-40 bg-midnight/85 backdrop-blur border-b border-brass/15">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-baseline gap-3">
+        <span class="font-serif text-3xl font-semibold text-brass tracking-tight">Sakbé</span>
+        <span class="hidden sm:inline text-xs tracking-[0.25em] uppercase text-ivory-dim">Cuisine levantine · Liège</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ivory-dim">
+        <a href="index.html" class="hover:text-brass-glow transition">Accueil</a>
+        <a href="menu.html" class="text-brass-glow">Carte</a>
+        <a href="index.html#traiteur" class="hover:text-brass-glow transition">Traiteur</a>
+        <a href="index.html#ame" class="hover:text-brass-glow transition">À propos</a>
+        <a href="index.html#contact" class="hover:text-brass-glow transition">Contact</a>
+      </nav>
+      <a href="reservation.html" class="hidden sm:inline-flex bg-terracotta text-midnight px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-terracotta-deep hover:text-ivory transition">Réserver</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="py-16 md:py-24 px-6 text-center">
+    <p class="ar-accent text-brass text-xl tracking-wide mb-4">صحة وعافية</p>
+    <p class="text-brass text-xs tracking-[0.28em] uppercase mb-4">La carte</p>
+    <h1 class="font-serif text-4xl md:text-6xl text-ivory leading-[1.1] mb-6 max-w-3xl mx-auto">Une cuisine de famille,<br/><em class="text-brass-glow">de Damas à Liège.</em></h1>
+    <p class="text-ivory-dim max-w-xl mx-auto leading-relaxed">Mezzés à partager, grillades à la braise, plats signatures et douceurs levantines. Tout est préparé frais, chaque jour, à base de produits sélectionnés.</p>
+  </section>
+
+  <!-- Sticky pills nav -->
+  <div class="menu-nav">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex gap-3 overflow-x-auto">
+      <a href="#mezzes-froids" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Mezzés froids</a>
+      <a href="#mezzes-chauds" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Mezzés chauds</a>
+      <a href="#grillades" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Grillades</a>
+      <a href="#signatures" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Saveurs authentiques</a>
+      <a href="#sauces" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Sauces</a>
+      <a href="#mocktails" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Mocktails</a>
+      <a href="#boissons" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Boissons</a>
+      <a href="#desserts" class="menu-pill" style="font-variant: small-caps; text-transform: lowercase;">Desserts</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- I · Mezzés froids -->
+    <section id="mezzes-froids" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">I · Mezzés froids</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">L'entrée en matière</h2>
+        <p class="text-ivory-dim mb-10 text-sm">À partager, frais et lumineux.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Houmous</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
+            <p class="dish-desc">Houmous crémeux à base de pois chiches et tahini, agrémenté d'huile d'olive de qualité, servi avec du pain oriental chaud.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Baba Ganoush</span><div class="dish-leader"></div><span class="dish-price">6,50 €</span></div>
+            <p class="dish-desc">Purée d'aubergines grillées, tahini, citron et huile d'olive, servie avec du pain syrio-libanais chaud.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Caviar d'aubergine (Moutable)</span><div class="dish-leader"></div><span class="dish-price">7,00 €</span></div>
+            <p class="dish-desc">Aubergines frites mélangées à du tahini, du jus de citron et de l'ail, pour une purée onctueuse et savoureuse.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Mouhamara</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
+            <p class="dish-desc">Tartinade de poivrons rouges grillés, noix concassées, mélasse de grenade et chapelure, parfumée aux épices.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Yalnji</span><div class="dish-leader"></div><span class="dish-price">5,50 €</span></div>
+            <p class="dish-desc">Délice d'héritage ottoman : feuilles de vigne roulées à la main, farcies de riz parfumé aux herbes et nappées d'huile d'olive.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Fattouch</span><div class="dish-leader"></div><span class="dish-price">7,00 €</span></div>
+            <p class="dish-desc">Salade colorée de légumes frais (salade, tomate, concombre), agrémentée de croûtons de pain libanais croustillants pour une texture et un goût uniques.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Taboulé</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
+            <p class="dish-desc">Salade fraîche à base de persil, menthe, tomates et oignons, enrichie de boulghour et assaisonnée d'huile d'olive et de jus de citron.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Kisir</span><div class="dish-leader"></div><span class="dish-price">6,50 €</span></div>
+            <p class="dish-desc">Salade turque à base de boulghour fin, tomates, oignons rouges, menthe, citron, concentré de tomate et épices.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Salade aux betteraves</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div>
+            <p class="dish-desc">Betteraves fondantes finement assaisonnées, relevées d'herbes fraîches, pour une note élégante et colorée dans l'assiette.</p>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Salade Grecque</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
+            <p class="dish-desc">Un classique méditerranéen : tomates, concombres, feta et olives noires, relevés d'origan et d'huile d'olive, pour un voyage gourmand en Grèce.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Salade au Yaourt</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
+            <p class="dish-desc">Préparation traditionnelle à base de yaourt onctueux, concombre et menthe fraîche, idéale pour accompagner des plats épicés.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- II · Mezzés chauds -->
+    <section id="mezzes-chauds" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">II · Mezzés chauds</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Petits feux</h2>
+        <p class="text-ivory-dim mb-10 text-sm">Bouchées chaudes, herbes et épices.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Falafel</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div>
+            <p class="dish-desc">Falafels végétariens croustillants à base de pois chiches et d'épices, servis par 2 avec une sauce au sésame.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans gluten</span><span class="allergen">Sans lactose</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Kebbé</span><div class="dish-leader"></div><span class="dish-price">2,50 €</span></div>
+            <p class="dish-desc">Boulettes de viande hachée aux épices, enrobées de blé concassé et frites, dorées et croustillantes à l'extérieur, tendres à l'intérieur, servies à l'unité.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Cheese Samoussa</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
+            <p class="dish-desc">Samoussas croustillants au fromage fondant épicé, servis par 2 pièces.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Samoussa aux légumes</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
+            <p class="dish-desc">Samoussas croustillants, servis par 2 pièces.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Samoussa au poulet</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
+            <p class="dish-desc">Samoussas croustillants, servis par 2 pièces.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Fatteh d'Aubergines (Fatteh Makdous)</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div>
+            <p class="dish-desc">Aubergines rôties sur pain libanais grillé, garnies de yaourt à l'ail, viande hachée et pignons grillés, un plat savoureux aux textures croustillantes et onctueuses.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Moujadara</span><div class="dish-leader"></div><span class="dish-price">5,50 €</span></div>
+            <p class="dish-desc">Mélange de lentilles et boulgour, garni d'oignons frits croustillants, un plat végétarien savoureux et équilibré.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span><span class="allergen">Sans lactose</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Waffle Fries</span><div class="dish-leader"></div><span class="dish-price">6,00 €</span></div>
+            <p class="dish-desc">Savoureuses waffle fries, gaufres de pommes de terre croustillantes aux épices maison, idéales même en livraison.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Frites épicées</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
+            <p class="dish-desc">Croustillantes aux épices maison.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Riz Sakbé</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div>
+            <p class="dish-desc">Une généreuse portion de riz à grains longs, parfaitement cuit et épicé.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Soupe de lentilles</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- III · Sakbé Grillades -->
+    <section id="grillades" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">III · Sakbé grillades</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">À la braise</h2>
+        <p class="text-ivory-dim mb-4 text-sm">Service de 18h à 22h.</p>
+        <p class="text-ivory-dim italic mb-10 text-sm border-l-2 border-brass/40 pl-4 max-w-2xl">Toutes nos grillades sont servies avec riz parfumé, salade coleslaw, sauce à l'ail, biwaz, waffle fries et pain syro-libanais à la muhammara (crème de poivrons rouges grillés).</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Ailes de Poulet</span><div class="dish-leader"></div><span class="dish-price">15,50 €</span></div>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Shich Tawok</span><div class="dish-leader"></div><span class="dish-price">17,50 €</span></div>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé 1/2 poulet rôti</span><div class="dish-leader"></div><span class="dish-price">18,00 €</span></div>
+            <p class="dish-desc">Demi-poulet rôti, frites épicées croustillantes, sauce coleslaw et sauce à l'ail.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Kabab</span><div class="dish-leader"></div><span class="dish-price">18,50 €</span></div>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Brochette de Bœuf</span><div class="dish-leader"></div><span class="dish-price">19,00 €</span></div>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Côte d'agneau</span><div class="dish-leader"></div><span class="dish-price">22,00 €</span></div>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Mixte</span><div class="dish-leader"></div><span class="dish-price">27,00 €</span></div>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- IV · Saveurs authentiques -->
+    <section id="signatures" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">IV · Saveurs authentiques</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Les signatures</h2>
+        <p class="text-ivory-dim mb-10 text-sm">Les classiques de la maison, ceux qu'on revient chercher.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Maqlouba</span><div class="dish-leader"></div><span class="dish-price">17,50 €</span></div>
+            <p class="dish-desc">Plat traditionnel de riz parfumé, bœuf tendre, aubergines grillées et épices, cuit en marmite et servi avec une salade de yaourt au concombre. Une version végane est également disponible.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Mahndi Bœuf</span><div class="dish-leader"></div><span class="dish-price">19,00 €</span></div>
+            <p class="dish-desc">Bœuf tendre mijoté lentement, servi avec un riz parfumé aux épices orientales, légèrement fumé au charbon, et accompagné d'une sauce maison.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Mahndi Poulet</span><div class="dish-leader"></div><span class="dish-price">18,00 €</span></div>
+            <p class="dish-desc">Servi avec riz parfumé aux épices orientales, légèrement fumé au charbon, et accompagné d'une sauce maison.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Crispy</span><div class="dish-leader"></div><span class="dish-price">13,50 €</span></div>
+            <p class="dish-desc">Poulet mariné croustillant fait maison, servi avec sauce maison et waffle fries.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Shawrma</span><div class="dish-leader"></div><span class="dish-price">14,00 €</span></div>
+            <p class="dish-desc">Poulet mariné grillé dans un pain syro-libanais, avec pickles, sauce à l'ail et waffle fries croustillantes.</p>
+            <div><span class="allergen">Halal</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sakbé Falafel</span><div class="dish-leader"></div><span class="dish-price">12,50 €</span></div>
+            <p class="dish-desc">Quatre falafels maison croustillants, accompagnés de sauce au sésame, houmous et légumes frais.</p>
+            <div><span class="allergen">Vegan</span><span class="allergen">Végétarien</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- V · Sauces maison -->
+    <section id="sauces" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">V · Sauces maison</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Les compagnons</h2>
+        <p class="text-ivory-dim mb-10 text-sm">Faites le matin, pour accompagner.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sauce coleslaw</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
+            <p class="dish-desc">Faite maison.</p>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sauce Ail</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
+            <p class="dish-desc">Faite maison.</p>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sauce Sésame</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
+            <p class="dish-desc">Faite maison.</p>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Spicy Sauce</span><div class="dish-leader"></div><span class="dish-price">1,50 €</span></div>
+            <p class="dish-desc">Faite maison.</p>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sauce Mayo</span><div class="dish-leader"></div><span class="dish-price">1,00 €</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Sauce ketchup</span><div class="dish-leader"></div><span class="dish-price">1,00 €</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VI · Mocktails -->
+    <section id="mocktails" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">VI · Mocktails</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Sans alcool</h2>
+        <p class="text-ivory-dim mb-10 text-sm">À siroter lentement, comme il se doit.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div><div class="dish-row"><span class="dish-name">Mojito Classique</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Tropical Mocktail</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Violete</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Sunny Pêche</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Strawberry Mocktail</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Mangue Mocktail</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Pastèque Mocktail</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Piña Colada</span><div class="dish-leader"></div><span class="dish-price">7,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Piña Colada à la fraise</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Piña Colada Passion</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Piña Colada Mangue</span><div class="dish-leader"></div><span class="dish-price">8,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Ice-Tea Fraise Maison</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Ice-Tea Pêche Maison</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Ice-Tea Mangue Maison</span><div class="dish-leader"></div><span class="dish-price">5,00 €</span></div></div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VII · Boissons -->
+    <section id="boissons" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">VII · Boissons</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">Pour étancher</h2>
+        <p class="text-ivory-dim mb-10 text-sm">Classiques et traditionnelles.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Ayran</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div>
+            <p class="dish-desc">Boisson traditionnelle au yaourt, délicatement salée, offrant une fraîcheur subtile qui sublime les plats épicés et les grillades.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div><div class="dish-row"><span class="dish-name">Jus d'orange pressé</span><div class="dish-leader"></div><span class="dish-price">4,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Cola</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Cola Zéro</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Cola Melon</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Spa Orange</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Eau plate 1/2 L</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div></div>
+          <div><div class="dish-row"><span class="dish-name">Eau pétillante 1/2 L</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div></div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VIII · Desserts -->
+    <section id="desserts" class="menu-section">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-brass text-xs tracking-[0.28em] mb-3" style="font-variant: small-caps; text-transform: lowercase;">VIII · Desserts</p>
+        <h2 class="text-3xl md:text-4xl mb-2 text-ivory" style="font-family: 'Fraunces', serif;">La douceur</h2>
+        <p class="text-ivory-dim mb-10 text-sm">Pour finir comme à la maison.</p>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Riz au Lait</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
+            <p class="dish-desc">Riz au lait parfumé à la fleur d'oranger et garni de pistaches croquantes.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Feuilletés à la crème (warbat bil ashta)</span><div class="dish-leader"></div><span class="dish-price">4,00 €</span></div>
+            <p class="dish-desc">Un feuilleté croustillant, garni d'une crème pâtissière et parsemé de pistaches croquantes, pour une douceur raffinée et gourmande.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Knafeh</span><div class="dish-leader"></div><span class="dish-price">7,00 €</span></div>
+            <p class="dish-desc">Pâte de kataïf dorée et croustillante, fourrée de crème, nappée de sirop à la fleur d'oranger et parsemée de pistaches — كنافة</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+          <div>
+            <div class="dish-row"><span class="dish-name">Basbousa</span><div class="dish-leader"></div><span class="dish-price">3,50 €</span></div>
+            <p class="dish-desc">Gâteau de semoule imbibé de sirop parfumé, garni de noix de coco et de pistaches.</p>
+            <div><span class="allergen">Végétarien</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA bas de carte -->
+    <section class="py-20 px-6 text-center">
+      <p class="text-brass text-xs tracking-[0.28em] uppercase mb-4">À très bientôt</p>
+      <h2 class="font-serif text-3xl md:text-4xl text-ivory mb-6">Prêt à passer à table ?</h2>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="reservation.html" class="bg-terracotta text-midnight px-8 py-4 rounded-full font-semibold hover:bg-terracotta-deep hover:text-ivory transition">Réserver une table</a>
+        <a href="index.html#contact" class="border-2 border-brass/50 text-ivory px-8 py-4 rounded-full font-medium hover:bg-brass hover:text-midnight hover:border-brass transition">Nous contacter</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-ivory pt-16 pb-8 border-t border-brass/15">
+    <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
+      <img src="img/sakbe-logo-gold.png" alt="Sakbé" class="h-16 mx-auto mb-4 brightness-110" />
+      <p class="text-ivory-dim text-sm leading-relaxed max-w-md mx-auto">Cuisine levantine de famille, à Liège depuis 2017.</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 pt-8 border-t border-brass/15">
+
+      <div class="flex flex-col items-center md:items-start gap-3">
+        <p class="text-brass text-xs tracking-[0.28em]" style="font-variant: small-caps; text-transform: lowercase;">Suivez Sakbé</p>
+        <div class="flex gap-5">
+          <a href="https://facebook.com/SakbeHousefood" target="_blank" rel="noopener" aria-label="Facebook Sakbé" class="text-brass hover:text-brass-glow transition">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 21.5h4v-8h3.6l.4-4h-4V7.5a1 1 0 011-1h3v-4h-3a5 5 0 00-5 5v2h-2l-.4 4h2.4v8z"/></svg>
+          </a>
+          <a href="https://instagram.com/sakbe.be" target="_blank" rel="noopener" aria-label="Instagram Sakbé" class="text-brass hover:text-brass-glow transition">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://tiktok.com/@sakbe_officiel" target="_blank" rel="noopener" aria-label="TikTok Sakbé" class="text-brass hover:text-brass-glow transition">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 7.5v4a8 8 0 01-5-1.7V16a6 6 0 11-6-6v3.5a2.5 2.5 0 102.5 2.5V2h3a4 4 0 004 4v1.5H19z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <a href="https://plateoo.github.io/serenity-studio/" target="_blank" rel="noopener" class="stamp-wrap" aria-label="Site conçu par Serenity Studio">
+        <div class="stamp-frame">
+          <div class="stamp-inner">
+            <span class="stamp-eyebrow">Conçu par</span>
+            <span class="stamp-name">Serenity Studio</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    // Highlight active pill on scroll
+    const pills = document.querySelectorAll('.menu-pill');
+    const sections = document.querySelectorAll('main section[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          pills.forEach(p => p.classList.toggle('active', p.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>

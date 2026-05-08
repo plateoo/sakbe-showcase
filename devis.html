@@ -16,10 +16,11 @@
       theme: { extend: {
         fontFamily: { 'serif': ['Fraunces', 'serif'], 'sans': ['DM Sans', 'sans-serif'] },
         colors: {
-          'ivory': '#FAF6F0', 'ivory-warm': '#F4ECDF', 'sand': '#E8D9C0',
-          'terracotta': '#C75D3F', 'terracotta-deep': '#9C3E25',
-          'ochre': '#D89556', 'savane': '#5C6B3F', 'lapis': '#2C5078',
-          'brass': '#B8945F', 'charcoal': '#2A1F1A',
+          'midnight': '#0D0908', 'ember': '#1C1410', 'charcoal': '#2A1F1A',
+          'terracotta': '#D26A4B', 'terracotta-deep': '#9C3E25',
+          'brass': '#C9A063', 'brass-glow': '#E5C089',
+          'ochre': '#D89556', 'oxblood': '#5A1F1A', 'lapis': '#2C5078',
+          'ivory': '#F4ECDF', 'ivory-dim': '#C9BFB0', 'sand': '#E8D9C0',
         }
       }}
     }
@@ -27,23 +28,25 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .formula-card { transition: all .25s ease; }
-    .formula-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(42,31,26,.08); }
+    .formula-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,.6); }
     .opt-row { transition: background .15s ease; }
-    .opt-row:has(input:checked) { background: #F4ECDF; }
+    .opt-row:has(input:checked) { background: rgba(201,160,99,0.08); }
     @media print {
       header, .no-print, .cgv-block button { display: none !important; }
-      body { background: white !important; }
+      body { background: white !important; color: #2A1F1A !important; }
+      .bg-midnight, .bg-ember, .bg-black, .bg-charcoal { background: white !important; color: #2A1F1A !important; }
+      .text-ivory, .text-ivory-dim, .text-brass, .text-brass-glow { color: #2A1F1A !important; }
     }
   </style>
 </head>
-<body class="bg-ivory text-charcoal font-sans antialiased">
+<body class="bg-midnight text-ivory font-sans antialiased">
 
   <!-- Header -->
-  <header class="bg-ivory border-b border-sand sticky top-0 z-30">
+  <header class="bg-midnight/90 backdrop-blur border-b border-brass/15 sticky top-0 z-30">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="font-serif text-2xl font-semibold text-terracotta">Serenity Studio</a>
-      <p class="text-xs text-charcoal/50 hidden sm:block"><a href="index.html" class="hover:text-terracotta">Accueil</a> <span class="mx-2">›</span> <span class="text-charcoal">Notre proposition</span></p>
-      <button onclick="window.print()" class="text-sm text-charcoal/70 hover:text-terracotta transition flex items-center gap-1.5"><i data-lucide="printer" class="w-4 h-4"></i> Imprimer</button>
+      <a href="index.html" class="font-serif text-2xl font-semibold text-brass">Serenity Studio</a>
+      <p class="text-xs text-ivory-dim hidden sm:block"><a href="index.html" class="hover:text-brass-glow">Accueil</a> <span class="mx-2">›</span> <span class="text-ivory">Notre proposition</span></p>
+      <button onclick="window.print()" class="text-sm text-ivory-dim hover:text-brass-glow transition flex items-center gap-1.5"><i data-lucide="printer" class="w-4 h-4"></i> Imprimer</button>
     </div>
   </header>
 
@@ -51,23 +54,23 @@
 
     <!-- Intro -->
     <section class="mb-14 text-center">
-      <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Proposition commerciale</p>
-      <h1 class="font-serif text-4xl md:text-5xl mb-4">Pour Sakbé,<br/><em class="text-terracotta">une présence digitale à votre image.</em></h1>
-      <p class="text-charcoal/70 max-w-2xl mx-auto text-lg">Trois formules pensées pour votre métier, à compléter selon vos priorités.</p>
-      <p class="text-xs text-charcoal/50 mt-4">Devis préparé le 7 mai 2026 par Serenity Studio · valable 30 jours</p>
+      <p class="text-brass text-xs tracking-[0.28em] uppercase mb-4">Proposition commerciale</p>
+      <h1 class="font-serif text-4xl md:text-5xl mb-4 text-ivory">Pour Sakbé,<br/><em class="text-brass-glow">une présence digitale à votre image.</em></h1>
+      <p class="text-ivory-dim max-w-2xl mx-auto text-lg">Trois formules pensées pour votre métier, à compléter selon vos priorités.</p>
+      <p class="text-xs text-ivory/50 mt-4">Devis préparé le 8 mai 2026 par Serenity Studio · valable 30 jours</p>
     </section>
 
     <!-- 3 formules -->
     <section class="grid md:grid-cols-3 gap-6 mb-16">
 
       <!-- Essentiel -->
-      <div class="formula-card bg-ivory-warm rounded-3xl p-7 flex flex-col">
-        <p class="text-xs tracking-[0.3em] uppercase text-charcoal/60 mb-2">Formule</p>
-        <h2 class="font-serif text-3xl mb-1">Essentiel</h2>
-        <p class="text-sm text-charcoal/60 mb-6">Pour démarrer en ligne</p>
-        <p class="font-serif text-5xl text-terracotta mb-1">1 190 €</p>
-        <p class="text-xs text-charcoal/50 mb-6">HTVA · livré en 3 semaines</p>
-        <ul class="space-y-3 text-sm text-charcoal/80 mb-8 flex-1">
+      <div class="formula-card bg-ember border border-brass/15 rounded-3xl p-7 flex flex-col">
+        <p class="text-xs tracking-[0.28em] uppercase text-brass mb-2">Formule</p>
+        <h2 class="font-serif text-3xl mb-1 text-ivory">Essentiel</h2>
+        <p class="text-sm text-ivory-dim mb-6">Pour démarrer en ligne</p>
+        <p class="font-serif text-5xl text-brass-glow mb-1">1 190 €</p>
+        <p class="text-xs text-ivory/50 mb-6">HTVA · livré en 3 semaines</p>
+        <ul class="space-y-3 text-sm text-ivory-dim mb-8 flex-1">
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Site vitrine immersif (1 page longue)</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Carte avec photos et descriptions</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Galerie + section traiteur</li>
@@ -75,128 +78,128 @@
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Formulaire de contact</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Optimisation Google de base</li>
         </ul>
-        <a href="index.html" class="text-center bg-charcoal text-ivory py-3 rounded-full text-sm font-medium hover:bg-charcoal/90 transition flex items-center justify-center gap-2">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
+        <a href="index.html" class="text-center bg-charcoal border border-brass/25 text-ivory py-3 rounded-full text-sm font-medium hover:bg-brass hover:text-midnight hover:border-brass transition flex items-center justify-center gap-2">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
       </div>
 
       <!-- Évolution (recommandé) -->
-      <div class="formula-card bg-charcoal text-ivory rounded-3xl p-7 flex flex-col relative shadow-2xl scale-[1.02]">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-ochre text-charcoal text-xs tracking-[0.2em] uppercase px-4 py-1.5 rounded-full font-bold">Recommandé</div>
-        <p class="text-xs tracking-[0.3em] uppercase text-ochre mb-2">Formule</p>
+      <div class="formula-card bg-black border-2 border-brass text-ivory rounded-3xl p-7 flex flex-col relative shadow-2xl shadow-black/60 scale-[1.02]">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brass text-midnight text-xs tracking-[0.22em] uppercase px-4 py-1.5 rounded-full font-bold shadow-lg">Recommandé</div>
+        <p class="text-xs tracking-[0.28em] uppercase text-brass mb-2">Formule</p>
         <h2 class="font-serif text-3xl mb-1">Évolution</h2>
-        <p class="text-sm text-ivory/60 mb-6">Pour gagner en autonomie</p>
-        <p class="font-serif text-5xl text-ochre mb-1">1 990 €</p>
+        <p class="text-sm text-ivory-dim mb-6">Pour gagner en autonomie</p>
+        <p class="font-serif text-5xl text-brass-glow mb-1">1 990 €</p>
         <p class="text-xs text-ivory/50 mb-6">HTVA · livré en 3-4 semaines</p>
-        <ul class="space-y-3 text-sm text-ivory/85 mb-8 flex-1">
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-ochre mt-0.5 shrink-0"></i> Tout l'Essentiel inclus</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-ochre mt-0.5 shrink-0"></i> <strong>Espace de gestion</strong> (carte, photos, événements)</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-ochre mt-0.5 shrink-0"></i> Mise à jour des prix sans nous appeler</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-ochre mt-0.5 shrink-0"></i> Gestion des avis clients</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-ochre mt-0.5 shrink-0"></i> Tableau de bord visites</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-ochre mt-0.5 shrink-0"></i> Formation 1h30 incluse</li>
+        <ul class="space-y-3 text-sm text-ivory/90 mb-8 flex-1">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brass-glow mt-0.5 shrink-0"></i> Tout l'Essentiel inclus</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brass-glow mt-0.5 shrink-0"></i> <strong class="text-brass-glow">Espace de gestion</strong> (carte, photos, événements)</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brass-glow mt-0.5 shrink-0"></i> Mise à jour des prix sans nous appeler</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brass-glow mt-0.5 shrink-0"></i> Gestion des avis clients</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brass-glow mt-0.5 shrink-0"></i> Tableau de bord visites</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-brass-glow mt-0.5 shrink-0"></i> Formation 1h30 incluse</li>
         </ul>
-        <a href="admin.html" class="text-center bg-terracotta text-ivory py-3 rounded-full text-sm font-medium hover:bg-terracotta-deep transition flex items-center justify-center gap-2">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
+        <a href="admin.html" class="text-center bg-terracotta text-midnight py-3 rounded-full text-sm font-semibold hover:bg-terracotta-deep hover:text-ivory transition flex items-center justify-center gap-2">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
       </div>
 
       <!-- Premium -->
-      <div class="formula-card bg-ivory-warm rounded-3xl p-7 flex flex-col">
-        <p class="text-xs tracking-[0.3em] uppercase text-charcoal/60 mb-2">Formule</p>
-        <h2 class="font-serif text-3xl mb-1">Premium</h2>
-        <p class="text-sm text-charcoal/60 mb-6">Pour automatiser la salle</p>
-        <p class="font-serif text-5xl text-terracotta mb-1">2 890 €</p>
-        <p class="text-xs text-charcoal/50 mb-6">HTVA · livré en 4 semaines</p>
-        <ul class="space-y-3 text-sm text-charcoal/80 mb-8 flex-1">
+      <div class="formula-card bg-ember border border-brass/15 rounded-3xl p-7 flex flex-col">
+        <p class="text-xs tracking-[0.28em] uppercase text-brass mb-2">Formule</p>
+        <h2 class="font-serif text-3xl mb-1 text-ivory">Premium</h2>
+        <p class="text-sm text-ivory-dim mb-6">Pour automatiser la salle</p>
+        <p class="font-serif text-5xl text-brass-glow mb-1">2 890 €</p>
+        <p class="text-xs text-ivory/50 mb-6">HTVA · livré en 4 semaines</p>
+        <ul class="space-y-3 text-sm text-ivory-dim mb-8 flex-1">
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Tout l'Évolution inclus</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> <strong>Module de réservation 24/7</strong></li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> <strong class="text-ivory">Module de réservation 24/7</strong></li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Confirmation email automatique</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Gestion des plages et capacité</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Synchronisation calendrier</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Formation 2h incluse</li>
         </ul>
-        <a href="reservation.html" class="text-center bg-charcoal text-ivory py-3 rounded-full text-sm font-medium hover:bg-charcoal/90 transition flex items-center justify-center gap-2">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
+        <a href="reservation.html" class="text-center bg-charcoal border border-brass/25 text-ivory py-3 rounded-full text-sm font-medium hover:bg-brass hover:text-midnight hover:border-brass transition flex items-center justify-center gap-2">Voir la démo <i data-lucide="external-link" class="w-4 h-4"></i></a>
       </div>
     </section>
 
     <!-- Options -->
-    <section class="bg-ivory-warm rounded-3xl p-6 md:p-10 mb-12">
+    <section class="bg-ember border border-brass/15 rounded-3xl p-6 md:p-10 mb-12 shadow-2xl shadow-black/30">
       <div class="mb-8">
-        <p class="text-xs tracking-[0.3em] uppercase text-terracotta mb-2">Composez votre pack</p>
-        <h2 class="font-serif text-3xl md:text-4xl mb-2">Options recommandées pour Sakbé</h2>
-        <p class="text-charcoal/70">Cochez ce qui vous parle, le total se met à jour automatiquement.</p>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-2">Composez votre pack</p>
+        <h2 class="font-serif text-3xl md:text-4xl mb-2 text-ivory">Options recommandées pour Sakbé</h2>
+        <p class="text-ivory-dim">Cochez ce qui vous parle, le total se met à jour automatiquement.</p>
       </div>
 
       <div class="space-y-1">
         <!-- Formule de base -->
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="radio" name="formula" value="1190" data-label="Essentiel" class="accent-terracotta w-5 h-5"/>
-          <div class="flex-1"><p class="font-medium">Formule Essentiel</p><p class="text-xs text-charcoal/60">Site vitrine immersif</p></div>
-          <span class="font-medium text-charcoal">1 190 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="radio" name="formula" value="1190" data-label="Essentiel" class="accent-brass w-5 h-5"/>
+          <div class="flex-1"><p class="font-medium text-ivory">Formule Essentiel</p><p class="text-xs text-ivory-dim">Site vitrine immersif</p></div>
+          <span class="font-medium text-brass-glow">1 190 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer bg-sand/40">
-          <input type="radio" name="formula" value="1990" data-label="Évolution" class="accent-terracotta w-5 h-5" checked/>
-          <div class="flex-1"><p class="font-medium">Formule Évolution <span class="ml-2 bg-ochre/30 text-ochre text-xs px-2 py-0.5 rounded-full font-medium">Recommandé</span></p><p class="text-xs text-charcoal/60">Vitrine + espace de gestion autonome</p></div>
-          <span class="font-medium text-charcoal">1 990 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer border border-brass/20 bg-charcoal/40">
+          <input type="radio" name="formula" value="1990" data-label="Évolution" class="accent-brass w-5 h-5" checked/>
+          <div class="flex-1"><p class="font-medium text-ivory">Formule Évolution <span class="ml-2 bg-brass text-midnight text-xs px-2 py-0.5 rounded-full font-bold">Recommandé</span></p><p class="text-xs text-ivory-dim">Vitrine + espace de gestion autonome</p></div>
+          <span class="font-medium text-brass-glow">1 990 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="radio" name="formula" value="2890" data-label="Premium" class="accent-terracotta w-5 h-5"/>
-          <div class="flex-1"><p class="font-medium">Formule Premium</p><p class="text-xs text-charcoal/60">Vitrine + gestion + réservation 24/7</p></div>
-          <span class="font-medium text-charcoal">2 890 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="radio" name="formula" value="2890" data-label="Premium" class="accent-brass w-5 h-5"/>
+          <div class="flex-1"><p class="font-medium text-ivory">Formule Premium</p><p class="text-xs text-ivory-dim">Vitrine + gestion + réservation 24/7</p></div>
+          <span class="font-medium text-brass-glow">2 890 €</span>
         </label>
 
-        <div class="border-t border-sand my-4"></div>
+        <div class="border-t border-brass/15 my-4"></div>
 
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="450" data-label="Shooting photo pro" class="accent-terracotta w-5 h-5" checked/>
-          <div class="flex-1"><p class="font-medium">Shooting photo professionnel</p><p class="text-xs text-charcoal/60">Demi-journée, 25 photos retouchées · indispensable</p></div>
-          <span class="font-medium text-charcoal">+ 450 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="450" data-label="Shooting photo pro" class="accent-brass w-5 h-5" checked/>
+          <div class="flex-1"><p class="font-medium text-ivory">Shooting photo professionnel</p><p class="text-xs text-ivory-dim">Demi-journée, 25 photos retouchées · indispensable</p></div>
+          <span class="font-medium text-brass-glow">+ 450 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="590" data-label="SEO local Liège" class="accent-terracotta w-5 h-5" checked/>
-          <div class="flex-1"><p class="font-medium">SEO local Liège</p><p class="text-xs text-charcoal/60">Optimisation Google Maps + mots-clés "restaurant libanais Liège"</p></div>
-          <span class="font-medium text-charcoal">+ 590 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="590" data-label="SEO local Liège" class="accent-brass w-5 h-5" checked/>
+          <div class="flex-1"><p class="font-medium text-ivory">SEO local Liège</p><p class="text-xs text-ivory-dim">Optimisation Google Maps + mots-clés "restaurant libanais Liège"</p></div>
+          <span class="font-medium text-brass-glow">+ 590 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="390" data-label="Module devis traiteur" class="accent-terracotta w-5 h-5" checked/>
-          <div class="flex-1"><p class="font-medium">Module devis traiteur</p><p class="text-xs text-charcoal/60">Formulaire qualifiant événement (date, format, budget) · spécifique Sakbé</p></div>
-          <span class="font-medium text-charcoal">+ 390 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="390" data-label="Module devis traiteur" class="accent-brass w-5 h-5" checked/>
+          <div class="flex-1"><p class="font-medium text-ivory">Module devis traiteur</p><p class="text-xs text-ivory-dim">Formulaire qualifiant événement (date, format, budget) · spécifique Sakbé</p></div>
+          <span class="font-medium text-brass-glow">+ 390 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="180" data-label="Hébergement annuel" class="accent-terracotta w-5 h-5" checked/>
-          <div class="flex-1"><p class="font-medium">Hébergement & nom de domaine · 1 an</p><p class="text-xs text-charcoal/60">SSL, sauvegardes, mises à jour de sécurité</p></div>
-          <span class="font-medium text-charcoal">+ 180 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="180" data-label="Hébergement annuel" class="accent-brass w-5 h-5" checked/>
+          <div class="flex-1"><p class="font-medium text-ivory">Hébergement & nom de domaine · 1 an</p><p class="text-xs text-ivory-dim">SSL, sauvegardes, mises à jour de sécurité</p></div>
+          <span class="font-medium text-brass-glow">+ 180 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="490" data-label="Multilingue FR/EN" class="accent-terracotta w-5 h-5"/>
-          <div class="flex-1"><p class="font-medium">Multilingue FR / EN</p><p class="text-xs text-charcoal/60">Traduction professionnelle + sélecteur de langue</p></div>
-          <span class="font-medium text-charcoal">+ 490 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="490" data-label="Multilingue FR/EN" class="accent-brass w-5 h-5"/>
+          <div class="flex-1"><p class="font-medium text-ivory">Multilingue FR / EN</p><p class="text-xs text-ivory-dim">Traduction professionnelle + sélecteur de langue</p></div>
+          <span class="font-medium text-brass-glow">+ 490 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="588" data-label="Maintenance 12 mois" class="accent-terracotta w-5 h-5"/>
-          <div class="flex-1"><p class="font-medium">Maintenance mensuelle · 12 mois</p><p class="text-xs text-charcoal/60">49 €/mois · mises à jour, sauvegardes, support prioritaire</p></div>
-          <span class="font-medium text-charcoal">+ 588 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="588" data-label="Maintenance 12 mois" class="accent-brass w-5 h-5"/>
+          <div class="flex-1"><p class="font-medium text-ivory">Maintenance mensuelle · 12 mois</p><p class="text-xs text-ivory-dim">49 €/mois · mises à jour, sauvegardes, support prioritaire</p></div>
+          <span class="font-medium text-brass-glow">+ 588 €</span>
         </label>
-        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer">
-          <input type="checkbox" data-price="290" data-label="Module SMS confirmation" class="accent-terracotta w-5 h-5"/>
-          <div class="flex-1"><p class="font-medium">Module SMS de confirmation</p><p class="text-xs text-charcoal/60">Rappel automatique la veille (réduit les no-shows) · pour Premium</p></div>
-          <span class="font-medium text-charcoal">+ 290 €</span>
+        <label class="opt-row flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-charcoal/40">
+          <input type="checkbox" data-price="290" data-label="Module SMS confirmation" class="accent-brass w-5 h-5"/>
+          <div class="flex-1"><p class="font-medium text-ivory">Module SMS de confirmation</p><p class="text-xs text-ivory-dim">Rappel automatique la veille (réduit les no-shows) · pour Premium</p></div>
+          <span class="font-medium text-brass-glow">+ 290 €</span>
         </label>
       </div>
 
       <!-- Total -->
-      <div class="mt-10 bg-charcoal text-ivory rounded-2xl p-6 md:p-8">
+      <div class="mt-10 bg-black border border-brass/30 text-ivory rounded-2xl p-6 md:p-8 shadow-2xl shadow-black/60">
         <div class="flex items-baseline justify-between mb-4">
-          <p class="text-xs tracking-[0.3em] uppercase text-ochre">Total estimé</p>
+          <p class="text-xs tracking-[0.28em] uppercase text-brass">Total estimé</p>
           <p class="text-xs text-ivory/50">HTVA · TVA 21 % en sus</p>
         </div>
-        <p id="total" class="font-serif text-5xl md:text-6xl text-ochre mb-6">3 600 €</p>
+        <p id="total" class="font-serif text-5xl md:text-6xl text-brass-glow mb-6">3 600 €</p>
 
-        <div class="grid sm:grid-cols-2 gap-3 pt-5 border-t border-ivory/15">
-          <div class="bg-ivory/5 rounded-xl p-4">
-            <p class="text-xs tracking-[0.2em] uppercase text-ochre mb-1">Acompte signature</p>
-            <p class="font-serif text-2xl"><span id="deposit">1 800 €</span> <span class="text-sm text-ivory/60 font-sans">(50 %)</span></p>
+        <div class="grid sm:grid-cols-2 gap-3 pt-5 border-t border-brass/20">
+          <div class="bg-ember/60 border border-brass/15 rounded-xl p-4">
+            <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Acompte signature</p>
+            <p class="font-serif text-2xl text-ivory"><span id="deposit">1 800 €</span> <span class="text-sm text-ivory-dim font-sans">(50 %)</span></p>
           </div>
-          <div class="bg-ivory/5 rounded-xl p-4">
-            <p class="text-xs tracking-[0.2em] uppercase text-ochre mb-1">Solde livraison</p>
-            <p class="font-serif text-2xl"><span id="balance">1 800 €</span> <span class="text-sm text-ivory/60 font-sans">(50 %)</span></p>
+          <div class="bg-ember/60 border border-brass/15 rounded-xl p-4">
+            <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Solde livraison</p>
+            <p class="font-serif text-2xl text-ivory"><span id="balance">1 800 €</span> <span class="text-sm text-ivory-dim font-sans">(50 %)</span></p>
           </div>
         </div>
       </div>
@@ -204,18 +207,18 @@
 
     <!-- Conditions -->
     <section class="grid md:grid-cols-2 gap-4 mb-12 text-sm">
-      <div class="bg-ivory-warm rounded-2xl p-6">
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Conditions de paiement</p>
-        <ul class="space-y-2 text-charcoal/80">
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Acompte de <strong>50 %</strong> à la signature du devis</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Solde de <strong>50 %</strong> à la livraison du site</li>
+      <div class="bg-ember border border-brass/15 rounded-2xl p-6">
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Conditions de paiement</p>
+        <ul class="space-y-2 text-ivory-dim">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Acompte de <strong class="text-ivory">50 %</strong> à la signature du devis</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Solde de <strong class="text-ivory">50 %</strong> à la livraison du site</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Paiement à 30 jours · TVA 21 % B2B Belgique</li>
           <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Devis valable 30 jours</li>
         </ul>
       </div>
-      <div class="bg-ivory-warm rounded-2xl p-6">
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Délais & ajustements</p>
-        <ul class="space-y-2 text-charcoal/80">
+      <div class="bg-ember border border-brass/15 rounded-2xl p-6">
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Délais & ajustements</p>
+        <ul class="space-y-2 text-ivory-dim">
           <li class="flex gap-2"><i data-lucide="clock" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Livraison standard : 3 à 4 semaines</li>
           <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Boost 2 semaines : + 20 % sur le total</li>
           <li class="flex gap-2"><i data-lucide="settings" class="w-4 h-4 text-terracotta mt-0.5 shrink-0"></i> Modifications hors périmètre : 75 €/h HTVA</li>
@@ -225,46 +228,46 @@
     </section>
 
     <!-- Bloc CGV proéminent -->
-    <section class="cgv-block bg-charcoal text-ivory rounded-2xl p-8 md:p-10 mb-12 border-l-8 border-terracotta">
+    <section class="cgv-block bg-black text-ivory rounded-2xl p-8 md:p-12 mb-12 border-l-4 border-brass shadow-2xl shadow-black/60">
       <div class="flex items-start gap-5">
-        <div class="hidden sm:flex w-14 h-14 rounded-full bg-terracotta items-center justify-center shrink-0"><i data-lucide="shield-check" class="w-7 h-7 text-ivory"></i></div>
+        <div class="hidden sm:flex w-14 h-14 rounded-full bg-brass items-center justify-center shrink-0 shadow-lg"><i data-lucide="shield-check" class="w-7 h-7 text-midnight"></i></div>
         <div class="flex-1">
-          <p class="text-xs tracking-[0.3em] uppercase text-ochre mb-2">Le cadre légal</p>
-          <h3 class="font-serif text-2xl md:text-3xl mb-3">Conditions Générales de Vente</h3>
-          <p class="text-ivory/80 leading-relaxed mb-6">Ce devis est régi par nos CGV B2B (droit belge). Nous vous invitons à les consulter avant signature — c'est le cadre légal classique qui protège les deux parties : prestations, paiement, délais, propriété intellectuelle, RGPD.</p>
-          <a href="cgv.html" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-ivory text-ivory px-6 py-3 rounded-full font-medium hover:bg-ivory hover:text-charcoal transition">Consulter les CGV <i data-lucide="external-link" class="w-4 h-4"></i></a>
+          <p class="text-xs tracking-[0.3em] uppercase text-brass mb-2">Le cadre légal</p>
+          <h3 class="font-serif text-2xl md:text-3xl mb-3 text-brass">Conditions Générales de Vente</h3>
+          <p class="text-ivory-dim leading-relaxed mb-6">Ce devis est régi par nos CGV B2B (droit belge). Nous vous invitons à les consulter avant signature — c'est le cadre légal classique qui protège les deux parties : prestations, paiement, délais, propriété intellectuelle, RGPD.</p>
+          <a href="cgv.html" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-brass text-midnight px-6 py-3 rounded-full font-semibold hover:bg-brass-glow transition">Consulter les CGV <i data-lucide="external-link" class="w-4 h-4"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Boutons d'action -->
     <section class="no-print flex flex-col sm:flex-row justify-center gap-4 mb-16">
-      <button onclick="window.print()" class="bg-ivory border-2 border-charcoal text-charcoal px-8 py-4 rounded-full font-medium hover:bg-charcoal hover:text-ivory transition flex items-center justify-center gap-2"><i data-lucide="printer" class="w-4 h-4"></i> Imprimer ma proposition</button>
-      <a id="sign-link" href="mailto:contact.serenitybelgium@gmail.com?subject=Sakbé%20·%20Validation%20du%20devis&body=Bonjour%2C%0A%0AJe%20valide%20le%20devis%20Sakbé.%20Merci%20de%20m'envoyer%20le%20PDF%20signable%20et%20la%20facture%20d'acompte.%0A%0ABien%20à%20vous%2C" class="bg-terracotta text-ivory px-8 py-4 rounded-full font-medium hover:bg-terracotta-deep transition flex items-center justify-center gap-2">Signer le devis <i data-lucide="check" class="w-4 h-4"></i></a>
+      <button onclick="window.print()" class="bg-transparent border border-brass/40 text-ivory px-8 py-4 rounded-full font-medium hover:bg-brass hover:text-midnight hover:border-brass transition flex items-center justify-center gap-2"><i data-lucide="printer" class="w-4 h-4"></i> Imprimer ma proposition</button>
+      <a id="sign-link" href="mailto:contact.serenitybelgium@gmail.com?subject=Sakbé%20·%20Validation%20du%20devis&body=Bonjour%2C%0A%0AJe%20valide%20le%20devis%20Sakbé.%20Merci%20de%20m'envoyer%20le%20PDF%20signable%20et%20la%20facture%20d'acompte.%0A%0ABien%20à%20vous%2C" class="bg-terracotta text-midnight px-8 py-4 rounded-full font-semibold hover:bg-terracotta-deep hover:text-ivory transition flex items-center justify-center gap-2">Signer le devis <i data-lucide="check" class="w-4 h-4"></i></a>
     </section>
   </main>
 
   <!-- Footer Serenity -->
-  <footer class="bg-charcoal text-ivory pt-12 pb-8">
+  <footer class="bg-black text-ivory pt-12 pb-8 border-t border-brass/15">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 mb-8">
       <div>
-        <p class="font-serif text-2xl text-terracotta font-semibold mb-2">Serenity Studio</p>
-        <p class="text-xs text-ivory/60 leading-relaxed">Sites web sur mesure pour restaurants et indépendants</p>
+        <p class="font-serif text-2xl text-brass font-semibold mb-2">Serenity Studio</p>
+        <p class="text-xs text-ivory-dim leading-relaxed">Sites web sur mesure pour restaurants et indépendants</p>
       </div>
-      <div class="text-sm text-ivory/70">
-        <p class="text-xs tracking-[0.2em] uppercase text-ochre mb-3">Entité juridique</p>
-        <p>Serenity Belgium</p>
+      <div class="text-sm text-ivory-dim">
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Entité juridique</p>
+        <p class="text-ivory">Serenity Belgium</p>
         <p>TVA BE 1031.214.423</p>
       </div>
-      <div class="text-sm text-ivory/70">
-        <p class="text-xs tracking-[0.2em] uppercase text-ochre mb-3">Contact</p>
-        <p><a href="tel:+32470118222" class="hover:text-terracotta transition">0470 / 11 82 22</a></p>
-        <p><a href="mailto:contact.serenitybelgium@gmail.com" class="hover:text-terracotta transition">contact.serenitybelgium@gmail.com</a></p>
+      <div class="text-sm text-ivory-dim">
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Contact</p>
+        <p><a href="tel:+32470118222" class="hover:text-brass-glow transition">0470 / 11 82 22</a></p>
+        <p><a href="mailto:contact.serenitybelgium@gmail.com" class="hover:text-brass-glow transition">contact.serenitybelgium@gmail.com</a></p>
       </div>
     </div>
-    <div class="max-w-6xl mx-auto px-6 pt-6 border-t border-ivory/10 flex flex-col md:flex-row justify-between gap-3 text-xs text-ivory/50">
+    <div class="max-w-6xl mx-auto px-6 pt-6 border-t border-brass/15 flex flex-col md:flex-row justify-between gap-3 text-xs text-ivory/50">
       <p>© 2026 Serenity Studio</p>
-      <p><a href="cgv.html" class="hover:text-terracotta transition">CGV</a></p>
+      <p><a href="cgv.html" class="hover:text-brass-glow transition">CGV</a></p>
     </div>
   </footer>
 

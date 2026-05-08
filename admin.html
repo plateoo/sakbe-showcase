@@ -16,43 +16,44 @@
       theme: { extend: {
         fontFamily: { 'serif': ['Fraunces', 'serif'], 'sans': ['DM Sans', 'sans-serif'] },
         colors: {
-          'ivory': '#FAF6F0', 'ivory-warm': '#F4ECDF', 'sand': '#E8D9C0',
-          'terracotta': '#C75D3F', 'terracotta-deep': '#9C3E25',
-          'ochre': '#D89556', 'savane': '#5C6B3F', 'lapis': '#2C5078',
-          'brass': '#B8945F', 'charcoal': '#2A1F1A',
+          'midnight': '#0D0908', 'ember': '#1C1410', 'charcoal': '#2A1F1A',
+          'terracotta': '#D26A4B', 'terracotta-deep': '#9C3E25',
+          'brass': '#C9A063', 'brass-glow': '#E5C089',
+          'ochre': '#D89556', 'oxblood': '#5A1F1A', 'lapis': '#2C5078',
+          'ivory': '#F4ECDF', 'ivory-dim': '#C9BFB0', 'sand': '#E8D9C0',
         }
       }}
     }
   </script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-ivory text-charcoal font-sans antialiased min-h-screen">
+<body class="bg-midnight text-ivory font-sans antialiased min-h-screen">
 
   <!-- Banner démo -->
   <div class="bg-terracotta text-ivory text-center py-3 px-6 text-sm">
-    <strong>Démonstration · Formule Évolution</strong> — Aperçu de l'espace de gestion. <a href="devis.html" class="underline hover:text-ochre">Voir le devis</a> · <a href="index.html" class="underline hover:text-ochre">Retour au site</a>
+    <strong>Démonstration · Formule Évolution</strong> — Aperçu de l'espace de gestion. <a href="devis.html" class="underline hover:text-brass-glow">Voir le devis</a> · <a href="index.html" class="underline hover:text-brass-glow">Retour au site</a>
   </div>
 
   <div class="flex flex-col md:flex-row min-h-screen">
 
     <!-- Sidebar -->
-    <aside class="w-full md:w-60 md:min-h-screen bg-charcoal text-ivory md:flex-shrink-0">
-      <div class="p-6 border-b border-ivory/10">
-        <p class="font-serif text-2xl text-terracotta font-semibold">Sakbé</p>
-        <p class="text-xs text-ivory/50 tracking-[0.2em] uppercase mt-0.5">Espace de gestion</p>
+    <aside class="w-full md:w-60 md:min-h-screen bg-black text-ivory md:flex-shrink-0 border-r border-brass/15">
+      <div class="p-6 border-b border-brass/15">
+        <p class="font-serif text-2xl text-brass font-semibold">Sakbé</p>
+        <p class="text-xs text-brass/70 tracking-[0.2em] uppercase mt-0.5">Espace de gestion</p>
       </div>
       <nav class="p-4 space-y-1 text-sm">
-        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-terracotta text-ivory font-medium"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Tableau de bord</a>
-        <a href="#carte" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="utensils-crossed" class="w-4 h-4"></i> Carte</a>
-        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="party-popper" class="w-4 h-4"></i> Événements</a>
-        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="clock" class="w-4 h-4"></i> Horaires</a>
-        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="image" class="w-4 h-4"></i> Photos</a>
-        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="star" class="w-4 h-4"></i> Avis</a>
-        <a href="#reservations" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="calendar-check" class="w-4 h-4"></i> Réservations</a>
-        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-ivory/5 text-ivory/80 transition"><i data-lucide="briefcase" class="w-4 h-4"></i> Traiteur</a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-terracotta text-midnight font-semibold"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Tableau de bord</a>
+        <a href="#carte" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="utensils-crossed" class="w-4 h-4"></i> Carte</a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="party-popper" class="w-4 h-4"></i> Événements</a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="clock" class="w-4 h-4"></i> Horaires</a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="image" class="w-4 h-4"></i> Photos</a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="star" class="w-4 h-4"></i> Avis</a>
+        <a href="#reservations" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="calendar-check" class="w-4 h-4"></i> Réservations</a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-charcoal text-ivory-dim hover:text-brass-glow transition"><i data-lucide="briefcase" class="w-4 h-4"></i> Traiteur</a>
       </nav>
-      <div class="p-4 mt-6 mx-4 bg-ivory/5 rounded-xl text-xs text-ivory/60">
-        <p class="text-ochre font-medium mb-1">Besoin d'aide ?</p>
+      <div class="p-4 mt-6 mx-4 bg-charcoal border border-brass/20 rounded-xl text-xs text-ivory-dim">
+        <p class="text-brass font-medium mb-1">Besoin d'aide ?</p>
         <p>Support Serenity Studio<br/>0470 / 11 82 22</p>
       </div>
     </aside>
@@ -63,48 +64,48 @@
       <!-- Header top -->
       <header class="flex items-center justify-between mb-10">
         <div>
-          <p class="text-xs tracking-[0.3em] uppercase text-charcoal/50 mb-1">Mardi 12 mai 2026</p>
-          <h1 class="font-serif text-3xl md:text-4xl">Bienvenue, équipe Sakbé</h1>
+          <p class="text-xs tracking-[0.28em] uppercase text-brass mb-1">Mardi 12 mai 2026</p>
+          <h1 class="font-serif text-3xl md:text-4xl text-ivory">Bienvenue, équipe Sakbé</h1>
         </div>
         <div class="flex items-center gap-4">
-          <button class="hidden md:flex items-center gap-2 text-sm text-charcoal/60 hover:text-terracotta transition"><i data-lucide="bell" class="w-4 h-4"></i> 3</button>
-          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-terracotta to-terracotta-deep flex items-center justify-center text-ivory font-medium">SK</div>
+          <button class="hidden md:flex items-center gap-2 text-sm text-ivory-dim hover:text-brass-glow transition"><i data-lucide="bell" class="w-4 h-4"></i> 3</button>
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-terracotta to-oxblood flex items-center justify-center text-midnight font-bold">SK</div>
         </div>
       </header>
 
       <!-- 4 stats cards -->
       <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-12">
-        <div class="bg-ivory-warm rounded-2xl p-5 md:p-6">
+        <div class="bg-ember border border-brass/15 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/30">
           <div class="flex items-center justify-between mb-3">
-            <p class="text-xs tracking-[0.2em] uppercase text-charcoal/60">Plats actifs</p>
-            <div class="w-9 h-9 rounded-lg bg-terracotta/10 flex items-center justify-center text-terracotta"><i data-lucide="utensils-crossed" class="w-4 h-4"></i></div>
+            <p class="text-xs tracking-[0.2em] uppercase text-brass">Plats actifs</p>
+            <div class="w-9 h-9 rounded-lg bg-terracotta/15 flex items-center justify-center text-terracotta"><i data-lucide="utensils-crossed" class="w-4 h-4"></i></div>
           </div>
-          <p class="font-serif text-4xl text-charcoal">24</p>
-          <p class="text-xs text-savane mt-1">+ 2 ce mois-ci</p>
+          <p class="font-serif text-4xl text-ivory">24</p>
+          <p class="text-xs text-brass-glow mt-1">+ 2 ce mois-ci</p>
         </div>
-        <div class="bg-ivory-warm rounded-2xl p-5 md:p-6">
+        <div class="bg-ember border border-brass/15 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/30">
           <div class="flex items-center justify-between mb-3">
-            <p class="text-xs tracking-[0.2em] uppercase text-charcoal/60">Réservations · jour</p>
-            <div class="w-9 h-9 rounded-lg bg-ochre/15 flex items-center justify-center text-ochre"><i data-lucide="calendar-check" class="w-4 h-4"></i></div>
+            <p class="text-xs tracking-[0.2em] uppercase text-brass">Réservations · jour</p>
+            <div class="w-9 h-9 rounded-lg bg-brass/15 flex items-center justify-center text-brass-glow"><i data-lucide="calendar-check" class="w-4 h-4"></i></div>
           </div>
-          <p class="font-serif text-4xl text-charcoal">12</p>
-          <p class="text-xs text-charcoal/60 mt-1">38 couverts prévus</p>
+          <p class="font-serif text-4xl text-ivory">12</p>
+          <p class="text-xs text-ivory-dim mt-1">38 couverts prévus</p>
         </div>
-        <div class="bg-ivory-warm rounded-2xl p-5 md:p-6">
+        <div class="bg-ember border border-brass/15 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/30">
           <div class="flex items-center justify-between mb-3">
-            <p class="text-xs tracking-[0.2em] uppercase text-charcoal/60">Visites du mois</p>
-            <div class="w-9 h-9 rounded-lg bg-savane/15 flex items-center justify-center text-savane"><i data-lucide="eye" class="w-4 h-4"></i></div>
+            <p class="text-xs tracking-[0.2em] uppercase text-brass">Visites du mois</p>
+            <div class="w-9 h-9 rounded-lg bg-lapis/20 flex items-center justify-center text-lapis"><i data-lucide="eye" class="w-4 h-4"></i></div>
           </div>
-          <p class="font-serif text-4xl text-charcoal">1 847</p>
-          <p class="text-xs text-savane mt-1">+ 18 % vs avril</p>
+          <p class="font-serif text-4xl text-ivory">1 847</p>
+          <p class="text-xs text-brass-glow mt-1">+ 18 % vs avril</p>
         </div>
-        <div class="bg-ivory-warm rounded-2xl p-5 md:p-6">
+        <div class="bg-ember border border-brass/15 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/30">
           <div class="flex items-center justify-between mb-3">
-            <p class="text-xs tracking-[0.2em] uppercase text-charcoal/60">Avis moyen</p>
-            <div class="w-9 h-9 rounded-lg bg-lapis/15 flex items-center justify-center text-lapis"><i data-lucide="star" class="w-4 h-4"></i></div>
+            <p class="text-xs tracking-[0.2em] uppercase text-brass">Avis moyen</p>
+            <div class="w-9 h-9 rounded-lg bg-brass-glow/20 flex items-center justify-center text-brass-glow"><i data-lucide="star" class="w-4 h-4"></i></div>
           </div>
-          <p class="font-serif text-4xl text-charcoal">4,8 <span class="text-lg text-charcoal/40">/ 5</span></p>
-          <p class="text-xs text-charcoal/60 mt-1">137 avis Google</p>
+          <p class="font-serif text-4xl text-ivory">4,8 <span class="text-lg text-ivory-dim">/ 5</span></p>
+          <p class="text-xs text-ivory-dim mt-1">137 avis Google</p>
         </div>
       </section>
 
@@ -112,16 +113,16 @@
       <section id="carte" class="mb-12">
         <div class="flex items-center justify-between mb-6">
           <div>
-            <h2 class="font-serif text-2xl mb-1">Carte du restaurant</h2>
-            <p class="text-sm text-charcoal/60">Gérez vos plats, prix, photos et disponibilité.</p>
+            <h2 class="font-serif text-2xl mb-1 text-ivory">Carte du restaurant</h2>
+            <p class="text-sm text-ivory-dim">Gérez vos plats, prix, photos et disponibilité.</p>
           </div>
-          <button class="bg-terracotta text-ivory px-5 py-2.5 rounded-full text-sm font-medium hover:bg-terracotta-deep transition flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter un plat</button>
+          <button class="bg-terracotta text-midnight px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-terracotta-deep hover:text-ivory transition flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter un plat</button>
         </div>
 
-        <div class="bg-ivory-warm rounded-2xl overflow-hidden border border-sand">
+        <div class="bg-midnight rounded-2xl overflow-hidden border border-brass/15 shadow-2xl shadow-black/40">
           <div class="overflow-x-auto">
             <table class="w-full text-sm min-w-[720px]">
-              <thead class="bg-sand/50 text-charcoal/70 text-xs uppercase tracking-wider">
+              <thead class="bg-black text-brass text-xs uppercase tracking-wider">
                 <tr>
                   <th class="text-left py-3 px-5">Plat</th>
                   <th class="text-left py-3 px-5">Catégorie</th>
@@ -130,69 +131,69 @@
                   <th class="text-right py-3 px-5">Actions</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-sand">
-                <tr class="hover:bg-ivory transition">
+              <tbody class="divide-y divide-brass/10 [&_tr:nth-child(even)]:bg-ember">
+                <tr class="hover:bg-charcoal transition">
                   <td class="py-3 px-5 flex items-center gap-3"><img src="img/taboule.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Taboulé</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze froid</td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
                   <td class="py-3 px-5 font-medium">9,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
+                <tr class="hover:bg-charcoal transition">
                   <td class="py-3 px-5 flex items-center gap-3"><img src="img/houmous.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Houmous</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze froid</td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
                   <td class="py-3 px-5 font-medium">8,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
+                <tr class="hover:bg-charcoal transition">
                   <td class="py-3 px-5 flex items-center gap-3"><img src="img/falafel.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Falafel</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze chaud</td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze chaud</td>
                   <td class="py-3 px-5 font-medium">7,50 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
+                <tr class="hover:bg-charcoal transition">
                   <td class="py-3 px-5 flex items-center gap-3"><img src="img/fatoush.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Fatoush</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Salade</td>
+                  <td class="py-3 px-5 text-ivory-dim">Salade</td>
                   <td class="py-3 px-5 font-medium">10,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/kebbe.png" class="w-10 h-10 rounded-lg object-contain bg-ivory" alt=""/><span class="font-medium">Kebbé</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze chaud</td>
+                <tr class="hover:bg-charcoal transition">
+                  <td class="py-3 px-5 flex items-center gap-3"><img src="img/kebbe.png" class="w-10 h-10 rounded-lg object-contain bg-charcoal" alt=""/><span class="font-medium text-ivory">Kebbé</span></td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze chaud</td>
                   <td class="py-3 px-5 font-medium">11,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
+                <tr class="hover:bg-charcoal transition">
                   <td class="py-3 px-5 flex items-center gap-3"><img src="img/ganoush.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Baba Ganoush</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze froid</td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
                   <td class="py-3 px-5 font-medium">8,50 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
+                <tr class="hover:bg-charcoal transition">
                   <td class="py-3 px-5 flex items-center gap-3"><img src="img/crispy.jpg" class="w-10 h-10 rounded-lg object-cover" alt=""/><span class="font-medium">Crispy</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze chaud</td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze chaud</td>
                   <td class="py-3 px-5 font-medium">9,50 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-sand flex items-center justify-center text-charcoal/40"><i data-lucide="image" class="w-4 h-4"></i></div><span class="font-medium">Mouhammara</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Mezze froid</td>
+                <tr class="hover:bg-charcoal transition">
+                  <td class="py-3 px-5 flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-charcoal flex items-center justify-center text-ivory/30"><i data-lucide="image" class="w-4 h-4"></i></div><span class="font-medium">Mouhammara</span></td>
+                  <td class="py-3 px-5 text-ivory-dim">Mezze froid</td>
                   <td class="py-3 px-5 font-medium">9,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-charcoal/10 text-charcoal/60 px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-charcoal/40"></span> Indisponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-oxblood/30 text-ivory-dim px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-ivory/40"></span> Indisponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
-                <tr class="hover:bg-ivory transition">
-                  <td class="py-3 px-5 flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-sand flex items-center justify-center text-charcoal/40"><i data-lucide="image" class="w-4 h-4"></i></div><span class="font-medium">Knefé</span></td>
-                  <td class="py-3 px-5 text-charcoal/70">Dessert</td>
+                <tr class="hover:bg-charcoal transition">
+                  <td class="py-3 px-5 flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-charcoal flex items-center justify-center text-ivory/30"><i data-lucide="image" class="w-4 h-4"></i></div><span class="font-medium">Knefé</span></td>
+                  <td class="py-3 px-5 text-ivory-dim">Dessert</td>
                   <td class="py-3 px-5 font-medium">7,00 €</td>
-                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-savane/15 text-savane px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-savane"></span> Disponible</span></td>
-                  <td class="py-3 px-5 text-right"><button class="text-charcoal/50 hover:text-terracotta p-1.5"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-charcoal/50 hover:text-terracotta-deep p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                  <td class="py-3 px-5"><span class="inline-flex items-center gap-1.5 bg-brass-glow/15 text-brass-glow px-2.5 py-1 rounded-full text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full bg-brass-glow"></span> Disponible</span></td>
+                  <td class="py-3 px-5 text-right"><button class="text-ivory-dim hover:text-brass-glow p-1.5 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button class="text-ivory-dim hover:text-terracotta p-1.5 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
                 </tr>
               </tbody>
             </table>
@@ -202,67 +203,67 @@
 
       <!-- Réservations -->
       <section id="reservations" class="grid lg:grid-cols-3 gap-6 mb-12">
-        <div class="lg:col-span-2 bg-ivory-warm rounded-2xl p-6 border border-sand">
+        <div class="lg:col-span-2 bg-ember rounded-2xl p-6 border border-brass/15 shadow-2xl shadow-black/30">
           <div class="flex items-center justify-between mb-5">
             <div>
-              <h2 class="font-serif text-2xl">Prochaines réservations</h2>
-              <p class="text-sm text-charcoal/60">Service du soir · 12 mai 2026</p>
+              <h2 class="font-serif text-2xl text-ivory">Prochaines réservations</h2>
+              <p class="text-sm text-ivory-dim">Service du soir · 12 mai 2026</p>
             </div>
-            <a href="#" class="text-sm text-terracotta hover:text-terracotta-deep font-medium">Voir tout →</a>
+            <a href="#" class="text-sm text-brass hover:text-brass-glow font-medium transition">Voir tout →</a>
           </div>
           <div class="space-y-2">
-            <div class="flex items-center justify-between gap-4 bg-ivory rounded-xl p-4 border border-sand">
+            <div class="flex items-center justify-between gap-4 bg-midnight rounded-xl p-4 border border-brass/15 hover:border-brass/30 transition">
               <div class="flex items-center gap-4">
-                <div class="bg-terracotta text-ivory rounded-lg w-14 py-2 text-center"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">19:00</p></div>
-                <div><p class="font-medium">Famille Khoury</p><p class="text-sm text-charcoal/60">+32 478 12 34 56 · Anniversaire</p></div>
+                <div class="bg-terracotta text-midnight rounded-lg w-14 py-2 text-center font-semibold"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">19:00</p></div>
+                <div><p class="font-medium text-ivory">Famille Khoury</p><p class="text-sm text-ivory-dim">+32 478 12 34 56 · Anniversaire</p></div>
               </div>
-              <div class="flex items-center gap-4"><span class="text-sm text-charcoal/70">6 couverts</span><span class="bg-savane/15 text-savane text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
+              <div class="flex items-center gap-4"><span class="text-sm text-ivory-dim">6 couverts</span><span class="bg-brass-glow/15 text-brass-glow text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
             </div>
-            <div class="flex items-center justify-between gap-4 bg-ivory rounded-xl p-4 border border-sand">
+            <div class="flex items-center justify-between gap-4 bg-midnight rounded-xl p-4 border border-brass/15 hover:border-brass/30 transition">
               <div class="flex items-center gap-4">
-                <div class="bg-terracotta text-ivory rounded-lg w-14 py-2 text-center"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">19:30</p></div>
-                <div><p class="font-medium">Sophie Renard</p><p class="text-sm text-charcoal/60">+32 495 22 11 88</p></div>
+                <div class="bg-terracotta text-midnight rounded-lg w-14 py-2 text-center font-semibold"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">19:30</p></div>
+                <div><p class="font-medium text-ivory">Sophie Renard</p><p class="text-sm text-ivory-dim">+32 495 22 11 88</p></div>
               </div>
-              <div class="flex items-center gap-4"><span class="text-sm text-charcoal/70">2 couverts</span><span class="bg-savane/15 text-savane text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
+              <div class="flex items-center gap-4"><span class="text-sm text-ivory-dim">2 couverts</span><span class="bg-brass-glow/15 text-brass-glow text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
             </div>
-            <div class="flex items-center justify-between gap-4 bg-ivory rounded-xl p-4 border border-sand">
+            <div class="flex items-center justify-between gap-4 bg-midnight rounded-xl p-4 border border-brass/15 hover:border-brass/30 transition">
               <div class="flex items-center gap-4">
-                <div class="bg-ochre text-ivory rounded-lg w-14 py-2 text-center"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">20:00</p></div>
-                <div><p class="font-medium">Mehdi Tazi</p><p class="text-sm text-charcoal/60">+32 471 33 44 22 · Sans gluten</p></div>
+                <div class="bg-brass text-midnight rounded-lg w-14 py-2 text-center font-semibold"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">20:00</p></div>
+                <div><p class="font-medium text-ivory">Mehdi Tazi</p><p class="text-sm text-ivory-dim">+32 471 33 44 22 · Sans gluten</p></div>
               </div>
-              <div class="flex items-center gap-4"><span class="text-sm text-charcoal/70">4 couverts</span><span class="bg-ochre/20 text-ochre text-xs px-2.5 py-1 rounded-full font-medium">À confirmer</span></div>
+              <div class="flex items-center gap-4"><span class="text-sm text-ivory-dim">4 couverts</span><span class="bg-brass/20 text-brass-glow text-xs px-2.5 py-1 rounded-full font-medium">À confirmer</span></div>
             </div>
-            <div class="flex items-center justify-between gap-4 bg-ivory rounded-xl p-4 border border-sand">
+            <div class="flex items-center justify-between gap-4 bg-midnight rounded-xl p-4 border border-brass/15 hover:border-brass/30 transition">
               <div class="flex items-center gap-4">
-                <div class="bg-terracotta text-ivory rounded-lg w-14 py-2 text-center"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">20:30</p></div>
-                <div><p class="font-medium">Anaïs Lambert</p><p class="text-sm text-charcoal/60">+32 489 99 12 76</p></div>
+                <div class="bg-terracotta text-midnight rounded-lg w-14 py-2 text-center font-semibold"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">20:30</p></div>
+                <div><p class="font-medium text-ivory">Anaïs Lambert</p><p class="text-sm text-ivory-dim">+32 489 99 12 76</p></div>
               </div>
-              <div class="flex items-center gap-4"><span class="text-sm text-charcoal/70">3 couverts</span><span class="bg-savane/15 text-savane text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
+              <div class="flex items-center gap-4"><span class="text-sm text-ivory-dim">3 couverts</span><span class="bg-brass-glow/15 text-brass-glow text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
             </div>
-            <div class="flex items-center justify-between gap-4 bg-ivory rounded-xl p-4 border border-sand">
+            <div class="flex items-center justify-between gap-4 bg-midnight rounded-xl p-4 border border-brass/15 hover:border-brass/30 transition">
               <div class="flex items-center gap-4">
-                <div class="bg-terracotta text-ivory rounded-lg w-14 py-2 text-center"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">21:00</p></div>
-                <div><p class="font-medium">Pierre Doutrelepont</p><p class="text-sm text-charcoal/60">+32 477 60 50 40</p></div>
+                <div class="bg-terracotta text-midnight rounded-lg w-14 py-2 text-center font-semibold"><p class="text-xs">JEU</p><p class="font-serif text-xl leading-none">21:00</p></div>
+                <div><p class="font-medium text-ivory">Pierre Doutrelepont</p><p class="text-sm text-ivory-dim">+32 477 60 50 40</p></div>
               </div>
-              <div class="flex items-center gap-4"><span class="text-sm text-charcoal/70">2 couverts</span><span class="bg-savane/15 text-savane text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
+              <div class="flex items-center gap-4"><span class="text-sm text-ivory-dim">2 couverts</span><span class="bg-brass-glow/15 text-brass-glow text-xs px-2.5 py-1 rounded-full font-medium">Confirmée</span></div>
             </div>
           </div>
         </div>
 
-        <div class="bg-charcoal text-ivory rounded-2xl p-6">
-          <p class="text-xs tracking-[0.2em] uppercase text-ochre mb-2">Demande traiteur</p>
-          <h3 class="font-serif text-xl mb-4">Mariage · 80 invités</h3>
-          <ul class="text-sm text-ivory/80 space-y-2 mb-6">
-            <li class="flex justify-between border-b border-ivory/10 pb-2"><span>Date</span><span>Sam. 27 juin 2026</span></li>
-            <li class="flex justify-between border-b border-ivory/10 pb-2"><span>Format</span><span>Buffet mezze</span></li>
-            <li class="flex justify-between border-b border-ivory/10 pb-2"><span>Lieu</span><span>Salle Embourg</span></li>
-            <li class="flex justify-between"><span>Budget estimé</span><span class="text-ochre font-medium">3 200 €</span></li>
+        <div class="bg-black border border-brass/20 text-ivory rounded-2xl p-6 shadow-2xl shadow-black/40">
+          <p class="text-xs tracking-[0.28em] uppercase text-brass mb-2">Demande traiteur</p>
+          <h3 class="font-serif text-xl mb-4 text-ivory">Mariage · 80 invités</h3>
+          <ul class="text-sm text-ivory-dim space-y-2 mb-6">
+            <li class="flex justify-between border-b border-brass/15 pb-2"><span>Date</span><span class="text-ivory">Sam. 27 juin 2026</span></li>
+            <li class="flex justify-between border-b border-brass/15 pb-2"><span>Format</span><span class="text-ivory">Buffet mezze</span></li>
+            <li class="flex justify-between border-b border-brass/15 pb-2"><span>Lieu</span><span class="text-ivory">Salle Embourg</span></li>
+            <li class="flex justify-between"><span>Budget estimé</span><span class="text-brass-glow font-semibold">3 200 €</span></li>
           </ul>
-          <button class="w-full bg-terracotta hover:bg-terracotta-deep text-ivory py-2.5 rounded-full text-sm font-medium transition">Répondre au client</button>
+          <button class="w-full bg-terracotta hover:bg-terracotta-deep text-midnight hover:text-ivory py-2.5 rounded-full text-sm font-semibold transition">Répondre au client</button>
         </div>
       </section>
 
-      <p class="text-center text-xs text-charcoal/40 italic">Cette page est un mockup de présentation. L'espace de gestion sera entièrement fonctionnel dans la formule Évolution.</p>
+      <p class="text-center text-xs text-ivory/40 italic">Cette page est un mockup de présentation. L'espace de gestion sera entièrement fonctionnel dans la formule Évolution.</p>
     </main>
   </div>
 

@@ -20,10 +20,11 @@
           'arabic': ['Amiri', 'serif'],
         },
         colors: {
-          'ivory': '#FAF6F0', 'ivory-warm': '#F4ECDF', 'sand': '#E8D9C0',
-          'terracotta': '#C75D3F', 'terracotta-deep': '#9C3E25',
-          'ochre': '#D89556', 'savane': '#5C6B3F', 'lapis': '#2C5078',
-          'brass': '#B8945F', 'charcoal': '#2A1F1A',
+          'midnight': '#0D0908', 'ember': '#1C1410', 'charcoal': '#2A1F1A',
+          'terracotta': '#D26A4B', 'terracotta-deep': '#9C3E25',
+          'brass': '#C9A063', 'brass-glow': '#E5C089',
+          'ochre': '#D89556', 'oxblood': '#5A1F1A', 'lapis': '#2C5078',
+          'ivory': '#F4ECDF', 'ivory-dim': '#C9BFB0', 'sand': '#E8D9C0',
         }
       }}
     }
@@ -44,52 +45,58 @@
     .lightbox.open { display: flex; }
     .lightbox img { max-width: 100%; max-height: 100%; border-radius: 1rem; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
     .ar-accent { font-family: 'Amiri', serif; font-weight: 700; }
+    .photo-mood { filter: brightness(0.88) contrast(1.05) saturate(1.05); }
+    .photo-hero-mood { filter: brightness(0.7) contrast(1.1) saturate(1.05); }
+    .dish-card .dish-desc { font-style: italic; font-family: 'Fraunces', serif; }
+    .section-rule { border: 0; height: 1px; background: rgba(201,160,99,0.2); max-width: 28rem; margin: 4rem auto; }
   </style>
 </head>
-<body class="bg-ivory text-charcoal font-sans antialiased">
+<body class="bg-midnight text-ivory font-sans antialiased">
 
   <!-- Header sticky -->
-  <header class="sticky top-0 z-40 bg-ivory/90 backdrop-blur border-b border-sand">
+  <header class="sticky top-0 z-40 bg-midnight/85 backdrop-blur border-b border-brass/15">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-baseline gap-3">
-        <span class="font-serif text-3xl font-semibold text-terracotta tracking-tight">Sakbé</span>
-        <span class="hidden sm:inline text-xs tracking-[0.25em] uppercase text-charcoal/60">Cuisine levantine · Liège</span>
+        <span class="font-serif text-3xl font-semibold text-brass tracking-tight">Sakbé</span>
+        <span class="hidden sm:inline text-xs tracking-[0.25em] uppercase text-ivory-dim">Cuisine levantine · Liège</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
-        <a href="#accueil" class="hover:text-terracotta transition">Accueil</a>
-        <a href="#carte" class="hover:text-terracotta transition">Carte</a>
-        <a href="#traiteur" class="hover:text-terracotta transition">Traiteur</a>
-        <a href="#ame" class="hover:text-terracotta transition">À propos</a>
-        <a href="#contact" class="hover:text-terracotta transition">Contact</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ivory-dim">
+        <a href="#accueil" class="hover:text-brass-glow transition">Accueil</a>
+        <a href="#carte" class="hover:text-brass-glow transition">Carte</a>
+        <a href="#traiteur" class="hover:text-brass-glow transition">Traiteur</a>
+        <a href="#ame" class="hover:text-brass-glow transition">À propos</a>
+        <a href="#contact" class="hover:text-brass-glow transition">Contact</a>
       </nav>
-      <a href="reservation.html" class="hidden sm:inline-flex bg-terracotta text-ivory px-5 py-2.5 rounded-full text-sm font-medium hover:bg-terracotta-deep transition">Réserver</a>
+      <a href="reservation.html" class="hidden sm:inline-flex bg-terracotta text-midnight px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-terracotta-deep hover:text-ivory transition">Réserver</a>
     </div>
   </header>
 
   <!-- Hero -->
   <section id="accueil" class="relative min-h-[88vh] flex items-center justify-center text-center px-6">
     <div class="absolute inset-0">
-      <img src="img/mezze-hero.jpg" alt="Mezze levantine" class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-charcoal/55"></div>
+      <img src="img/mezze-hero.jpg" alt="Mezze levantine" class="w-full h-full object-cover photo-hero-mood" />
+      <div class="absolute inset-0 bg-midnight/65"></div>
     </div>
     <div class="relative z-10 max-w-4xl">
-      <p class="ar-accent text-ochre/90 text-2xl mb-4">صحة وعافية</p>
-      <p class="font-sans text-xs tracking-[0.4em] uppercase text-ochre mb-5">Restaurant levantin · depuis 2017</p>
-      <h1 class="font-serif text-5xl md:text-7xl text-ivory leading-[1.05] mb-6">La table de famille<br/><em class="text-ochre">du Levant à Liège.</em></h1>
+      <p class="ar-accent text-brass text-2xl tracking-wide mb-4">صحة وعافية</p>
+      <p class="font-sans text-xs tracking-[0.4em] uppercase text-brass mb-5">Restaurant levantin · depuis 2017</p>
+      <h1 class="font-serif text-6xl md:text-8xl text-ivory leading-[1.05] mb-6">La table de famille<br/><em class="text-brass-glow">du Levant à Liège.</em></h1>
       <p class="text-ivory/85 text-lg md:text-xl max-w-2xl mx-auto mb-10">Restaurant · À emporter · Livraison · Traiteur — la cuisine d'une maman, ramenée de Syrie et du Liban.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="reservation.html" class="bg-terracotta text-ivory px-8 py-4 rounded-full font-medium hover:bg-terracotta-deep transition">Réserver une table</a>
-        <a href="#carte" class="border-2 border-ivory text-ivory px-8 py-4 rounded-full font-medium hover:bg-ivory hover:text-charcoal transition">Voir la carte</a>
+        <a href="reservation.html" class="bg-terracotta text-midnight px-8 py-4 rounded-full font-semibold hover:bg-terracotta-deep hover:text-ivory transition">Réserver une table</a>
+        <a href="#carte" class="border-2 border-brass/50 text-ivory px-8 py-4 rounded-full font-medium hover:bg-brass hover:text-midnight hover:border-brass transition">Voir la carte</a>
       </div>
     </div>
   </section>
 
+  <hr class="section-rule" />
+
   <!-- L'âme de Sakbé -->
-  <section id="ame" class="py-20 md:py-28 bg-ivory-warm">
+  <section id="ame" class="py-20 md:py-28 bg-ember">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
       <div class="flex justify-center">
-        <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl bg-gradient-to-br from-terracotta to-terracotta-deep p-3 shadow-2xl">
-          <div class="w-full h-full rounded-2xl bg-ivory-warm flex items-center justify-center overflow-hidden">
+        <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl bg-gradient-to-br from-terracotta to-oxblood p-3 shadow-2xl">
+          <div class="w-full h-full rounded-2xl bg-ember flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 200 200" class="w-full h-full">
               <defs>
                 <linearGradient id="chefGrad" x1="0" y1="0" x2="1" y2="1">
@@ -106,146 +113,152 @@
         </div>
       </div>
       <div>
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Notre histoire</p>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">I · Notre histoire</p>
         <h2 class="font-serif text-4xl md:text-5xl mb-6">Une maman, un voyage,<br/><em class="text-terracotta">une cuisine.</em></h2>
-        <p class="text-charcoal/80 text-lg leading-relaxed mb-5">Avant d'être un restaurant, Sakbé est une maison. Celle d'une cheffe qui a appris à cuisiner auprès des femmes de sa famille, de Damas à Beyrouth, en passant par la Bekaa et la côte tripolitaine.</p>
-        <p class="text-charcoal/80 text-lg leading-relaxed mb-5">Chaque plat porte un souvenir : un dimanche d'enfance, un mariage à la campagne, une grand-mère qui roulait les feuilles de vigne en chantant. Cette mémoire, on la sert à table — chaude, généreuse, sans détour.</p>
-        <p class="text-charcoal/80 text-lg leading-relaxed">À Fléron, près de Liège, nous cuisinons la même chose qu'à la maison. Rien de plus, rien de moins.</p>
+        <p class="text-ivory/85 text-lg leading-relaxed mb-5">Avant d'être un restaurant, Sakbé est une maison. Celle d'une cheffe qui a appris à cuisiner auprès des femmes de sa famille, de Damas à Beyrouth, en passant par la Bekaa et la côte tripolitaine.</p>
+        <p class="text-ivory/85 text-lg leading-relaxed mb-5">Chaque plat porte un souvenir : un dimanche d'enfance, un mariage à la campagne, une grand-mère qui roulait les feuilles de vigne en chantant. Cette mémoire, on la sert à table — chaude, généreuse, sans détour.</p>
+        <p class="text-ivory/85 text-lg leading-relaxed">À Fléron, près de Liège, nous cuisinons la même chose qu'à la maison. Rien de plus, rien de moins.</p>
       </div>
     </div>
   </section>
+
+  <hr class="section-rule" />
 
   <!-- Notre carte -->
   <section id="carte" class="py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-14">
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Notre carte</p>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">II · Notre carte</p>
         <h2 class="font-serif text-4xl md:text-5xl mb-4">Les saveurs <em class="text-terracotta">qui voyagent</em></h2>
-        <p class="text-charcoal/70 max-w-xl mx-auto">Une sélection de signatures levantines, à composer en mezze ou à savourer seul.</p>
+        <p class="text-ivory-dim max-w-xl mx-auto">Une sélection de signatures levantines, à composer en mezze ou à savourer seul.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="dish-card bg-ivory-warm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
-          <div class="aspect-square overflow-hidden"><img src="img/taboule.jpg" alt="Taboulé" class="w-full h-full object-cover hover:scale-105 transition duration-500" /></div>
+        <article class="dish-card bg-ember border border-brass/15 rounded-2xl overflow-hidden shadow-2xl shadow-black/30 hover:shadow-black/50 hover:border-brass/40 transition">
+          <div class="aspect-square overflow-hidden"><img src="img/taboule.jpg" alt="Taboulé" class="w-full h-full object-cover photo-mood hover:scale-105 hover:brightness-100 transition duration-500" /></div>
           <div class="p-6">
             <div class="flex justify-between items-baseline mb-2"><h3 class="font-serif text-2xl">Taboulé</h3><span class="text-brass font-medium">9 €</span></div>
-            <p class="dish-desc text-charcoal/70 text-sm leading-relaxed">Persil plat finement ciselé, boulgour fin, tomate, oignon, citron et huile d'olive vierge.</p>
+            <p class="dish-desc text-ivory-dim text-sm leading-relaxed">Persil plat finement ciselé, boulgour fin, tomate, oignon, citron et huile d'olive vierge.</p>
           </div>
         </article>
-        <article class="dish-card bg-ivory-warm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
-          <div class="aspect-square overflow-hidden"><img src="img/houmous.jpg" alt="Houmous" class="w-full h-full object-cover hover:scale-105 transition duration-500" /></div>
+        <article class="dish-card bg-ember border border-brass/15 rounded-2xl overflow-hidden shadow-2xl shadow-black/30 hover:shadow-black/50 hover:border-brass/40 transition">
+          <div class="aspect-square overflow-hidden"><img src="img/houmous.jpg" alt="Houmous" class="w-full h-full object-cover photo-mood hover:scale-105 hover:brightness-100 transition duration-500" /></div>
           <div class="p-6">
             <div class="flex justify-between items-baseline mb-2"><h3 class="font-serif text-2xl">Houmous</h3><span class="text-brass font-medium">8 €</span></div>
-            <p class="dish-desc text-charcoal/70 text-sm leading-relaxed">Pois chiches longuement cuits, tahini, citron, ail, filet d'huile d'olive et paprika doux.</p>
+            <p class="dish-desc text-ivory-dim text-sm leading-relaxed">Pois chiches longuement cuits, tahini, citron, ail, filet d'huile d'olive et paprika doux.</p>
           </div>
         </article>
-        <article class="dish-card bg-ivory-warm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
-          <div class="aspect-square overflow-hidden"><img src="img/falafel.jpg" alt="Falafel" class="w-full h-full object-cover hover:scale-105 transition duration-500" /></div>
+        <article class="dish-card bg-ember border border-brass/15 rounded-2xl overflow-hidden shadow-2xl shadow-black/30 hover:shadow-black/50 hover:border-brass/40 transition">
+          <div class="aspect-square overflow-hidden"><img src="img/falafel.jpg" alt="Falafel" class="w-full h-full object-cover photo-mood hover:scale-105 hover:brightness-100 transition duration-500" /></div>
           <div class="p-6">
             <div class="flex justify-between items-baseline mb-2"><h3 class="font-serif text-2xl">Falafel</h3><span class="text-brass font-medium">7,50 €</span></div>
-            <p class="dish-desc text-charcoal/70 text-sm leading-relaxed">Boulettes croustillantes de pois chiches et fèves, herbes fraîches, sauce yaourt-tahini.</p>
+            <p class="dish-desc text-ivory-dim text-sm leading-relaxed">Boulettes croustillantes de pois chiches et fèves, herbes fraîches, sauce yaourt-tahini.</p>
           </div>
         </article>
-        <article class="dish-card bg-ivory-warm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
-          <div class="aspect-square overflow-hidden"><img src="img/fatoush.jpg" alt="Fatoush" class="w-full h-full object-cover hover:scale-105 transition duration-500" /></div>
+        <article class="dish-card bg-ember border border-brass/15 rounded-2xl overflow-hidden shadow-2xl shadow-black/30 hover:shadow-black/50 hover:border-brass/40 transition">
+          <div class="aspect-square overflow-hidden"><img src="img/fatoush.jpg" alt="Fatoush" class="w-full h-full object-cover photo-mood hover:scale-105 hover:brightness-100 transition duration-500" /></div>
           <div class="p-6">
             <div class="flex justify-between items-baseline mb-2"><h3 class="font-serif text-2xl">Fatoush</h3><span class="text-brass font-medium">10 €</span></div>
-            <p class="dish-desc text-charcoal/70 text-sm leading-relaxed">Salade croquante de saison, pain grillé, sumac, mélasse de grenade et huile d'olive.</p>
+            <p class="dish-desc text-ivory-dim text-sm leading-relaxed">Salade croquante de saison, pain grillé, sumac, mélasse de grenade et huile d'olive.</p>
           </div>
         </article>
-        <article class="dish-card bg-ivory-warm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
-          <div class="aspect-square overflow-hidden bg-ivory"><img src="img/kebbe.png" alt="Kebbé" class="w-full h-full object-contain p-4 hover:scale-105 transition duration-500" /></div>
+        <article class="dish-card bg-ember border border-brass/15 rounded-2xl overflow-hidden shadow-2xl shadow-black/30 hover:shadow-black/50 hover:border-brass/40 transition">
+          <div class="aspect-square overflow-hidden bg-midnight"><img src="img/kebbe.png" alt="Kebbé" class="w-full h-full object-contain p-4 photo-mood hover:scale-105 hover:brightness-100 transition duration-500" /></div>
           <div class="p-6">
             <div class="flex justify-between items-baseline mb-2"><h3 class="font-serif text-2xl">Kebbé</h3><span class="text-brass font-medium">11 €</span></div>
-            <p class="dish-desc text-charcoal/70 text-sm leading-relaxed">Boulgour et bœuf finement hachés, farcis aux pignons et oignons confits, dorés à la friture.</p>
+            <p class="dish-desc text-ivory-dim text-sm leading-relaxed">Boulgour et bœuf finement hachés, farcis aux pignons et oignons confits, dorés à la friture.</p>
           </div>
         </article>
-        <article class="dish-card bg-ivory-warm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
-          <div class="aspect-square overflow-hidden"><img src="img/ganoush.jpg" alt="Baba Ganoush" class="w-full h-full object-cover hover:scale-105 transition duration-500" /></div>
+        <article class="dish-card bg-ember border border-brass/15 rounded-2xl overflow-hidden shadow-2xl shadow-black/30 hover:shadow-black/50 hover:border-brass/40 transition">
+          <div class="aspect-square overflow-hidden"><img src="img/ganoush.jpg" alt="Baba Ganoush" class="w-full h-full object-cover photo-mood hover:scale-105 hover:brightness-100 transition duration-500" /></div>
           <div class="p-6">
             <div class="flex justify-between items-baseline mb-2"><h3 class="font-serif text-2xl">Baba Ganoush</h3><span class="text-brass font-medium">8,50 €</span></div>
-            <p class="dish-desc text-charcoal/70 text-sm leading-relaxed">Aubergines fumées au feu, tahini, citron, ail. La douceur de la braise dans une cuillère.</p>
+            <p class="dish-desc text-ivory-dim text-sm leading-relaxed">Aubergines fumées au feu, tahini, citron, ail. La douceur de la braise dans une cuillère.</p>
           </div>
         </article>
       </div>
       <div class="text-center mt-12">
-        <a href="#contact" class="inline-flex items-center gap-2 text-terracotta hover:text-terracotta-deep font-medium border-b-2 border-terracotta pb-1">Voir la carte complète <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="#contact" class="inline-flex items-center gap-2 text-brass hover:text-brass-glow font-medium border-b border-brass/40 hover:border-brass-glow pb-1 transition">Voir la carte complète <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
     </div>
   </section>
 
+  <hr class="section-rule" />
+
   <!-- Bandeau 4 modes de service -->
-  <section class="py-16 bg-ivory-warm border-y border-sand">
+  <section class="py-16 bg-ember border-y border-brass/15">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       <div>
         <div class="w-14 h-14 mx-auto mb-4 bg-terracotta rounded-full flex items-center justify-center text-ivory"><i data-lucide="utensils-crossed" class="w-7 h-7"></i></div>
         <p class="font-serif text-xl mb-1">Sur place</p>
-        <p class="text-charcoal/60 text-sm">Salle de 30 couverts</p>
+        <p class="text-ivory-dim text-sm">Salle de 30 couverts</p>
       </div>
       <div>
         <div class="w-14 h-14 mx-auto mb-4 bg-ochre rounded-full flex items-center justify-center text-ivory"><i data-lucide="shopping-bag" class="w-7 h-7"></i></div>
         <p class="font-serif text-xl mb-1">À emporter</p>
-        <p class="text-charcoal/60 text-sm">Commande au comptoir</p>
+        <p class="text-ivory-dim text-sm">Commande au comptoir</p>
       </div>
       <div>
         <div class="w-14 h-14 mx-auto mb-4 bg-savane rounded-full flex items-center justify-center text-ivory"><i data-lucide="truck" class="w-7 h-7"></i></div>
         <p class="font-serif text-xl mb-1">Livraison</p>
-        <p class="text-charcoal/60 text-sm">Région liégeoise</p>
+        <p class="text-ivory-dim text-sm">Région liégeoise</p>
       </div>
       <div>
         <div class="w-14 h-14 mx-auto mb-4 bg-lapis rounded-full flex items-center justify-center text-ivory"><i data-lucide="party-popper" class="w-7 h-7"></i></div>
         <p class="font-serif text-xl mb-1">Traiteur</p>
-        <p class="text-charcoal/60 text-sm">Événements & buffets</p>
+        <p class="text-ivory-dim text-sm">Événements & buffets</p>
       </div>
     </div>
   </section>
 
   <!-- Marquee -->
-  <section class="bg-charcoal text-ivory py-8 overflow-hidden">
+  <section class="bg-black text-brass py-8 overflow-hidden border-y border-brass/10">
     <div class="marquee">
-      <div class="marquee__group font-serif italic text-2xl md:text-3xl text-ochre">
-        <span>Taboulé</span><span class="text-terracotta">·</span>
-        <span>Houmous</span><span class="text-terracotta">·</span>
-        <span>Kebbé</span><span class="text-terracotta">·</span>
-        <span>Fatoush</span><span class="text-terracotta">·</span>
-        <span>Falafel</span><span class="text-terracotta">·</span>
-        <span>Baba Ganoush</span><span class="text-terracotta">·</span>
-        <span>Mezze</span><span class="text-terracotta">·</span>
-        <span>Levantin</span><span class="text-terracotta">·</span>
-        <span>Familial</span><span class="text-terracotta">·</span>
-        <span>Sakbé depuis 2017</span><span class="text-terracotta">·</span>
+      <div class="marquee__group font-serif italic text-2xl md:text-3xl text-brass">
+        <span>Taboulé</span><span class="text-terracotta opacity-60">·</span>
+        <span>Houmous</span><span class="text-terracotta opacity-60">·</span>
+        <span>Kebbé</span><span class="text-terracotta opacity-60">·</span>
+        <span>Fatoush</span><span class="text-terracotta opacity-60">·</span>
+        <span>Falafel</span><span class="text-terracotta opacity-60">·</span>
+        <span>Baba Ganoush</span><span class="text-terracotta opacity-60">·</span>
+        <span>Mezze</span><span class="text-terracotta opacity-60">·</span>
+        <span>Levantin</span><span class="text-terracotta opacity-60">·</span>
+        <span>Familial</span><span class="text-terracotta opacity-60">·</span>
+        <span>Sakbé depuis 2017</span><span class="text-terracotta opacity-60">·</span>
       </div>
-      <div class="marquee__group font-serif italic text-2xl md:text-3xl text-ochre" aria-hidden="true">
-        <span>Taboulé</span><span class="text-terracotta">·</span>
-        <span>Houmous</span><span class="text-terracotta">·</span>
-        <span>Kebbé</span><span class="text-terracotta">·</span>
-        <span>Fatoush</span><span class="text-terracotta">·</span>
-        <span>Falafel</span><span class="text-terracotta">·</span>
-        <span>Baba Ganoush</span><span class="text-terracotta">·</span>
-        <span>Mezze</span><span class="text-terracotta">·</span>
-        <span>Levantin</span><span class="text-terracotta">·</span>
-        <span>Familial</span><span class="text-terracotta">·</span>
-        <span>Sakbé depuis 2017</span><span class="text-terracotta">·</span>
+      <div class="marquee__group font-serif italic text-2xl md:text-3xl text-brass" aria-hidden="true">
+        <span>Taboulé</span><span class="text-terracotta opacity-60">·</span>
+        <span>Houmous</span><span class="text-terracotta opacity-60">·</span>
+        <span>Kebbé</span><span class="text-terracotta opacity-60">·</span>
+        <span>Fatoush</span><span class="text-terracotta opacity-60">·</span>
+        <span>Falafel</span><span class="text-terracotta opacity-60">·</span>
+        <span>Baba Ganoush</span><span class="text-terracotta opacity-60">·</span>
+        <span>Mezze</span><span class="text-terracotta opacity-60">·</span>
+        <span>Levantin</span><span class="text-terracotta opacity-60">·</span>
+        <span>Familial</span><span class="text-terracotta opacity-60">·</span>
+        <span>Sakbé depuis 2017</span><span class="text-terracotta opacity-60">·</span>
       </div>
     </div>
   </section>
+
+  <hr class="section-rule" />
 
   <!-- Galerie masonry -->
   <section class="py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12">
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Galerie</p>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Galerie</p>
         <h2 class="font-serif text-4xl md:text-5xl">Un coup d'œil <em class="text-terracotta">à la maison</em></h2>
       </div>
       <div class="masonry">
-        <img data-lightbox src="img/taboule.jpg" alt="Taboulé" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/falafel.jpg" alt="Falafel" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/ambiance-1.jpg" alt="Ambiance restaurant" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/houmous.jpg" alt="Houmous" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/fatoush.jpg" alt="Fatoush" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/crispy.jpg" alt="Crispy" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/ganoush.jpg" alt="Baba Ganoush" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/ambiance-2.jpg" alt="Ambiance restaurant" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
-        <img data-lightbox src="img/mezze-hero.jpg" alt="Plateau mezze" class="w-full rounded-2xl cursor-zoom-in hover:opacity-90 transition" />
+        <img data-lightbox src="img/taboule.jpg" alt="Taboulé" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/falafel.jpg" alt="Falafel" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/ambiance-1.jpg" alt="Ambiance restaurant" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/houmous.jpg" alt="Houmous" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/fatoush.jpg" alt="Fatoush" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/crispy.jpg" alt="Crispy" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/ganoush.jpg" alt="Baba Ganoush" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/ambiance-2.jpg" alt="Ambiance restaurant" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
+        <img data-lightbox src="img/mezze-hero.jpg" alt="Plateau mezze" class="w-full rounded-2xl cursor-zoom-in photo-mood hover:opacity-100 hover:brightness-100 transition" />
       </div>
     </div>
   </section>
@@ -255,15 +268,17 @@
     <img id="lightbox-img" src="" alt="" />
   </div>
 
+  <hr class="section-rule" />
+
   <!-- Service traiteur -->
-  <section id="traiteur" class="py-20 md:py-28 bg-charcoal text-ivory">
+  <section id="traiteur" class="py-20 md:py-28 bg-ember text-ivory">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-      <div class="rounded-3xl overflow-hidden shadow-2xl">
-        <img src="img/ambiance-2.jpg" alt="Buffet traiteur Sakbé" class="w-full aspect-[4/3] object-cover" />
+      <div class="rounded-3xl overflow-hidden shadow-2xl ring-1 ring-brass/20">
+        <img src="img/ambiance-2.jpg" alt="Buffet traiteur Sakbé" class="w-full aspect-[4/3] object-cover photo-mood" />
       </div>
       <div>
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-ochre mb-4">Service traiteur</p>
-        <h2 class="font-serif text-4xl md:text-5xl mb-6">Faites voyager <em class="text-ochre">vos invités.</em></h2>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">III · Service traiteur</p>
+        <h2 class="font-serif text-4xl md:text-5xl mb-6">Faites voyager <em class="text-brass-glow">vos invités.</em></h2>
         <p class="text-ivory/80 text-lg leading-relaxed mb-5">Mariages, anniversaires, baptêmes, séminaires, brunchs : nous composons des buffets levantins sur mesure, livrés et dressés sur place.</p>
         <ul class="text-ivory/80 space-y-2 mb-8">
           <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-terracotta mt-1"></i> Plateaux mezze froids et chauds</li>
@@ -271,120 +286,124 @@
           <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-terracotta mt-1"></i> Options végétariennes & sans gluten</li>
           <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-terracotta mt-1"></i> Livraison en région liégeoise</li>
         </ul>
-        <a href="#contact" class="inline-flex items-center gap-2 bg-terracotta text-ivory px-7 py-4 rounded-full font-medium hover:bg-terracotta-deep transition">Demander un devis événement <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="#contact" class="inline-flex items-center gap-2 bg-terracotta text-midnight px-7 py-4 rounded-full font-semibold hover:bg-terracotta-deep hover:text-ivory transition">Demander un devis événement <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
     </div>
   </section>
 
+  <hr class="section-rule" />
+
   <!-- Avis clients -->
-  <section class="py-20 md:py-28 bg-sand">
+  <section class="py-20 md:py-28">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Ils en parlent</p>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">IV · Ils en parlent</p>
         <h2 class="font-serif text-4xl md:text-5xl">La table préférée <em class="text-terracotta">des Liégeois</em></h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-ivory rounded-2xl p-8 shadow-sm">
-          <div class="text-ochre mb-4 flex gap-1"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
-          <p class="font-serif text-lg leading-relaxed mb-5">"Le taboulé est une merveille — vraiment celui qu'on goûte au Liban. On revient une fois par mois depuis 2 ans."</p>
-          <p class="text-sm font-medium">Nadia M.</p>
-          <p class="text-xs text-charcoal/50">Cliente fidèle</p>
+        <div class="bg-ember rounded-2xl p-8 border border-brass/15 shadow-2xl shadow-black/40">
+          <div class="text-lapis mb-4 flex gap-1"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
+          <p class="font-serif italic text-lg leading-relaxed mb-5 text-ivory/90">"Le taboulé est une merveille — vraiment celui qu'on goûte au Liban. On revient une fois par mois depuis 2 ans."</p>
+          <p class="text-sm font-medium text-ivory">Nadia M.</p>
+          <p class="text-xs text-ivory-dim">Cliente fidèle</p>
         </div>
-        <div class="bg-ivory rounded-2xl p-8 shadow-sm">
-          <div class="text-ochre mb-4 flex gap-1"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
-          <p class="font-serif text-lg leading-relaxed mb-5">"Traiteur pour le mariage de mon frère, 80 personnes. Tout le monde en a parlé pendant des semaines. Service impeccable."</p>
-          <p class="text-sm font-medium">Karim B.</p>
-          <p class="text-xs text-charcoal/50">Mariage · 2025</p>
+        <div class="bg-ember rounded-2xl p-8 border border-brass/15 shadow-2xl shadow-black/40">
+          <div class="text-lapis mb-4 flex gap-1"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
+          <p class="font-serif italic text-lg leading-relaxed mb-5 text-ivory/90">"Traiteur pour le mariage de mon frère, 80 personnes. Tout le monde en a parlé pendant des semaines. Service impeccable."</p>
+          <p class="text-sm font-medium text-ivory">Karim B.</p>
+          <p class="text-xs text-ivory-dim">Mariage · 2025</p>
         </div>
-        <div class="bg-ivory rounded-2xl p-8 shadow-sm">
-          <div class="text-ochre mb-4 flex gap-1"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
-          <p class="font-serif text-lg leading-relaxed mb-5">"Les falafels les plus fondants de toute la région. Et l'accueil de la cheffe — comme à la maison."</p>
-          <p class="text-sm font-medium">Élodie V.</p>
-          <p class="text-xs text-charcoal/50">Habituée du quartier</p>
+        <div class="bg-ember rounded-2xl p-8 border border-brass/15 shadow-2xl shadow-black/40">
+          <div class="text-lapis mb-4 flex gap-1"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
+          <p class="font-serif italic text-lg leading-relaxed mb-5 text-ivory/90">"Les falafels les plus fondants de toute la région. Et l'accueil de la cheffe — comme à la maison."</p>
+          <p class="text-sm font-medium text-ivory">Élodie V.</p>
+          <p class="text-xs text-ivory-dim">Habituée du quartier</p>
         </div>
       </div>
     </div>
   </section>
+
+  <hr class="section-rule" />
 
   <!-- Contact -->
   <section id="contact" class="py-20 md:py-28">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Nous rejoindre</p>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">V · Nous rejoindre</p>
         <h2 class="font-serif text-4xl md:text-5xl">À très <em class="text-terracotta">bientôt à table</em></h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6 mb-16">
-        <a href="reservation.html" class="group bg-ivory-warm hover:bg-terracotta hover:text-ivory rounded-2xl p-8 text-center transition shadow-sm hover:shadow-xl">
-          <div class="w-14 h-14 mx-auto mb-4 bg-terracotta group-hover:bg-ivory rounded-full flex items-center justify-center"><i data-lucide="calendar-check" class="w-7 h-7 text-ivory group-hover:text-terracotta"></i></div>
-          <p class="font-serif text-2xl mb-1">Réserver</p>
+        <a href="reservation.html" class="group bg-ember border border-brass/15 hover:bg-terracotta hover:text-midnight hover:border-terracotta rounded-2xl p-8 text-center transition shadow-2xl shadow-black/30 hover:shadow-xl">
+          <div class="w-14 h-14 mx-auto mb-4 bg-terracotta group-hover:bg-midnight rounded-full flex items-center justify-center"><i data-lucide="calendar-check" class="w-7 h-7 text-midnight group-hover:text-terracotta"></i></div>
+          <p class="font-serif text-2xl mb-1 text-ivory group-hover:text-midnight">Réserver</p>
           <p class="text-sm opacity-70">en ligne, 24h/24</p>
         </a>
-        <a href="tel:+32487446177" class="group bg-ivory-warm hover:bg-ochre hover:text-ivory rounded-2xl p-8 text-center transition shadow-sm hover:shadow-xl">
-          <div class="w-14 h-14 mx-auto mb-4 bg-ochre group-hover:bg-ivory rounded-full flex items-center justify-center"><i data-lucide="phone" class="w-7 h-7 text-ivory group-hover:text-ochre"></i></div>
-          <p class="font-serif text-2xl mb-1">Téléphone</p>
+        <a href="tel:+32487446177" class="group bg-ember border border-brass/15 hover:bg-brass hover:text-midnight hover:border-brass rounded-2xl p-8 text-center transition shadow-2xl shadow-black/30 hover:shadow-xl">
+          <div class="w-14 h-14 mx-auto mb-4 bg-brass group-hover:bg-midnight rounded-full flex items-center justify-center"><i data-lucide="phone" class="w-7 h-7 text-midnight group-hover:text-brass"></i></div>
+          <p class="font-serif text-2xl mb-1 text-ivory group-hover:text-midnight">Téléphone</p>
           <p class="text-sm opacity-70">+32 487 44 61 77</p>
         </a>
-        <a href="mailto:contact@sakbe.be" class="group bg-ivory-warm hover:bg-savane hover:text-ivory rounded-2xl p-8 text-center transition shadow-sm hover:shadow-xl">
-          <div class="w-14 h-14 mx-auto mb-4 bg-savane group-hover:bg-ivory rounded-full flex items-center justify-center"><i data-lucide="shopping-bag" class="w-7 h-7 text-ivory group-hover:text-savane"></i></div>
-          <p class="font-serif text-2xl mb-1">Commander</p>
+        <a href="mailto:contact@sakbe.be" class="group bg-ember border border-brass/15 hover:bg-lapis hover:text-ivory hover:border-lapis rounded-2xl p-8 text-center transition shadow-2xl shadow-black/30 hover:shadow-xl">
+          <div class="w-14 h-14 mx-auto mb-4 bg-lapis group-hover:bg-ivory rounded-full flex items-center justify-center"><i data-lucide="shopping-bag" class="w-7 h-7 text-ivory group-hover:text-lapis"></i></div>
+          <p class="font-serif text-2xl mb-1 text-ivory">Commander</p>
           <p class="text-sm opacity-70">contact@sakbe.be</p>
         </a>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8 bg-ivory-warm rounded-3xl p-8 md:p-12">
+      <div class="grid md:grid-cols-2 gap-8 bg-ember border border-brass/15 rounded-3xl p-8 md:p-12">
         <div>
-          <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Nous trouver</p>
-          <h3 class="font-serif text-2xl mb-3">Av. des Martyrs 1<br/>4620 Fléron · Liège</h3>
-          <p class="text-charcoal/70 mb-6">À 10 minutes du centre de Liège, parking aisé devant le restaurant.</p>
-          <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Horaires</p>
-          <ul class="text-charcoal/80 space-y-1 text-sm">
-            <li class="flex justify-between border-b border-sand py-1.5"><span>Mardi – Jeudi</span><span>11h30 – 14h00 · 18h00 – 21h30</span></li>
-            <li class="flex justify-between border-b border-sand py-1.5"><span>Vendredi</span><span>18h00 – 22h00</span></li>
-            <li class="flex justify-between border-b border-sand py-1.5"><span>Samedi</span><span>11h30 – 14h30 · 18h00 – 22h00</span></li>
-            <li class="flex justify-between border-b border-sand py-1.5"><span>Dimanche</span><span>10h00 – 14h00</span></li>
-            <li class="flex justify-between py-1.5 text-charcoal/50"><span>Lundi</span><span>Fermé</span></li>
+          <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Nous trouver</p>
+          <h3 class="font-serif text-2xl mb-3 text-ivory">Av. des Martyrs 1<br/>4620 Fléron · Liège</h3>
+          <p class="text-ivory-dim mb-6">À 10 minutes du centre de Liège, parking aisé devant le restaurant.</p>
+          <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Horaires</p>
+          <ul class="text-ivory/85 space-y-1 text-sm">
+            <li class="flex justify-between border-b border-brass/15 py-1.5"><span>Mardi – Jeudi</span><span>11h30 – 14h00 · 18h00 – 21h30</span></li>
+            <li class="flex justify-between border-b border-brass/15 py-1.5"><span>Vendredi</span><span>18h00 – 22h00</span></li>
+            <li class="flex justify-between border-b border-brass/15 py-1.5"><span>Samedi</span><span>11h30 – 14h30 · 18h00 – 22h00</span></li>
+            <li class="flex justify-between border-b border-brass/15 py-1.5"><span>Dimanche</span><span>10h00 – 14h00</span></li>
+            <li class="flex justify-between py-1.5 text-ivory/40"><span>Lundi</span><span>Fermé</span></li>
           </ul>
         </div>
-        <div class="rounded-2xl overflow-hidden min-h-[300px]">
-          <iframe src="https://www.google.com/maps?q=Avenue+des+Martyrs+1,+4620+Fl%C3%A9ron&output=embed" width="100%" height="100%" style="border:0; min-height:300px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Sakbé"></iframe>
+        <div class="rounded-2xl overflow-hidden min-h-[300px] ring-1 ring-brass/15">
+          <iframe src="https://www.google.com/maps?q=Avenue+des+Martyrs+1,+4620+Fl%C3%A9ron&output=embed" width="100%" height="100%" style="border:0; min-height:300px; filter: brightness(0.85) saturate(0.9);" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Sakbé"></iframe>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-charcoal text-ivory pt-16 pb-8">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10 mb-10">
-      <div>
-        <img src="img/sakbe-logo-gold.png" alt="Sakbé" class="h-14 mb-4 brightness-110" />
-        <p class="text-ivory/70 text-sm leading-relaxed mb-5">Cuisine levantine de famille, à Liège depuis 2017.</p>
-        <div class="flex gap-3">
-          <a href="https://facebook.com/SakbeHousefood" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-ivory/30 flex items-center justify-center hover:bg-terracotta hover:border-terracotta transition" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-          <a href="https://instagram.com/sakbe.be" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-ivory/30 flex items-center justify-center hover:bg-terracotta hover:border-terracotta transition" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-          <a href="https://tiktok.com/@sakbe_officiel" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-ivory/30 flex items-center justify-center hover:bg-terracotta hover:border-terracotta transition" aria-label="TikTok"><i data-lucide="music" class="w-4 h-4"></i></a>
-        </div>
+  <footer class="bg-black text-ivory pt-20 pb-8 border-t border-brass/15">
+    <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
+      <img src="img/sakbe-logo-gold.png" alt="Sakbé" class="h-16 mx-auto mb-4 brightness-110" />
+      <p class="text-ivory-dim text-sm leading-relaxed max-w-md mx-auto">Cuisine levantine de famille, à Liège depuis 2017.</p>
+      <div class="flex gap-3 justify-center mt-5">
+        <a href="https://facebook.com/SakbeHousefood" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-brass/30 text-brass flex items-center justify-center hover:bg-brass hover:text-midnight hover:border-brass transition" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+        <a href="https://instagram.com/sakbe.be" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-brass/30 text-brass flex items-center justify-center hover:bg-brass hover:text-midnight hover:border-brass transition" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+        <a href="https://tiktok.com/@sakbe_officiel" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-brass/30 text-brass flex items-center justify-center hover:bg-brass hover:text-midnight hover:border-brass transition" aria-label="TikTok"><i data-lucide="music" class="w-4 h-4"></i></a>
       </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 mb-10">
       <div>
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-ochre mb-4">Liens</p>
-        <ul class="space-y-2 text-sm text-ivory/70">
-          <li><a href="reservation.html" class="hover:text-terracotta transition">Réservation</a></li>
-          <li><a href="admin.html" class="hover:text-terracotta transition">Espace de gestion</a></li>
-          <li><a href="devis.html" class="hover:text-terracotta transition">Notre proposition</a></li>
-          <li><a href="cgv.html" class="hover:text-terracotta transition">CGV</a></li>
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-4">Liens</p>
+        <ul class="space-y-2 text-sm text-ivory-dim">
+          <li><a href="reservation.html" class="hover:text-brass-glow transition">Réservation</a></li>
+          <li><a href="admin.html" class="hover:text-brass-glow transition">Espace de gestion</a></li>
+          <li><a href="devis.html" class="hover:text-brass-glow transition">Notre proposition</a></li>
+          <li><a href="cgv.html" class="hover:text-brass-glow transition">CGV</a></li>
         </ul>
       </div>
       <div>
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-ochre mb-4">Contact</p>
-        <ul class="space-y-2 text-sm text-ivory/70">
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-4">Contact</p>
+        <ul class="space-y-2 text-sm text-ivory-dim">
           <li>Av. des Martyrs 1<br/>4620 Fléron</li>
-          <li><a href="tel:+32487446177" class="hover:text-terracotta transition">+32 487 44 61 77</a></li>
-          <li><a href="mailto:contact@sakbe.be" class="hover:text-terracotta transition">contact@sakbe.be</a></li>
+          <li><a href="tel:+32487446177" class="hover:text-brass-glow transition">+32 487 44 61 77</a></li>
+          <li><a href="mailto:contact@sakbe.be" class="hover:text-brass-glow transition">contact@sakbe.be</a></li>
         </ul>
       </div>
       <div>
-        <p class="font-sans text-xs tracking-[0.3em] uppercase text-ochre mb-4">Horaires</p>
-        <ul class="space-y-1.5 text-sm text-ivory/70">
+        <p class="text-brass text-xs tracking-[0.28em] uppercase mb-4">Horaires</p>
+        <ul class="space-y-1.5 text-sm text-ivory-dim">
           <li>Mar – Jeu : 11h30–14h · 18h–21h30</li>
           <li>Ven : 18h–22h</li>
           <li>Sam : 11h30–14h30 · 18h–22h</li>
@@ -393,14 +412,14 @@
         </ul>
       </div>
     </div>
-    <div class="max-w-7xl mx-auto px-6 pt-6 border-t border-ivory/10 flex flex-col md:flex-row justify-between gap-3 text-xs text-ivory/50">
+    <div class="max-w-7xl mx-auto px-6 pt-6 border-t border-brass/15 flex flex-col md:flex-row justify-between gap-3 text-xs text-ivory/50">
       <p>© 2026 Sakbé · Tous droits réservés</p>
-      <p>Conçu par <a href="devis.html" class="text-terracotta hover:underline">Serenity Studio</a></p>
+      <p>Conçu par <a href="devis.html" class="text-brass hover:text-brass-glow transition">Serenity Studio</a></p>
     </div>
   </footer>
 
   <!-- Bouton flottant mobile -->
-  <a href="reservation.html" class="md:hidden fixed bottom-6 right-6 z-30 bg-terracotta text-ivory px-5 py-3.5 rounded-full font-medium shadow-2xl flex items-center gap-2">
+  <a href="reservation.html" class="md:hidden fixed bottom-6 right-6 z-30 bg-terracotta text-midnight px-5 py-3.5 rounded-full font-semibold shadow-2xl shadow-black/50 ring-1 ring-brass/30 flex items-center gap-2">
     <i data-lucide="calendar-check" class="w-5 h-5"></i> Réserver
   </a>
 

@@ -16,10 +16,11 @@
       theme: { extend: {
         fontFamily: { 'serif': ['Fraunces', 'serif'], 'sans': ['DM Sans', 'sans-serif'] },
         colors: {
-          'ivory': '#FAF6F0', 'ivory-warm': '#F4ECDF', 'sand': '#E8D9C0',
-          'terracotta': '#C75D3F', 'terracotta-deep': '#9C3E25',
-          'ochre': '#D89556', 'savane': '#5C6B3F', 'lapis': '#2C5078',
-          'brass': '#B8945F', 'charcoal': '#2A1F1A',
+          'midnight': '#0D0908', 'ember': '#1C1410', 'charcoal': '#2A1F1A',
+          'terracotta': '#D26A4B', 'terracotta-deep': '#9C3E25',
+          'brass': '#C9A063', 'brass-glow': '#E5C089',
+          'ochre': '#D89556', 'oxblood': '#5A1F1A', 'lapis': '#2C5078',
+          'ivory': '#F4ECDF', 'ivory-dim': '#C9BFB0', 'sand': '#E8D9C0',
         }
       }}
     }
@@ -29,67 +30,71 @@
     article h2 { scroll-margin-top: 5rem; }
     @media print {
       .no-print { display: none !important; }
-      body { background: white !important; color: black !important; }
+      html, body { background: #ffffff !important; color: #1a1a1a !important; }
+      .bg-midnight, .bg-ember, .bg-black, .bg-charcoal { background: #ffffff !important; color: #1a1a1a !important; }
+      .text-ivory, .text-ivory-dim { color: #1a1a1a !important; }
+      .text-brass, .text-brass-glow { color: #8a6a30 !important; }
+      .text-terracotta { color: #9C3E25 !important; }
       article { page-break-inside: avoid; }
-      a { color: black !important; text-decoration: none !important; }
+      a { color: #1a1a1a !important; text-decoration: none !important; }
     }
   </style>
 </head>
-<body class="bg-ivory text-charcoal font-sans antialiased">
+<body class="bg-midnight text-ivory font-sans antialiased">
 
   <!-- Header -->
-  <header class="no-print bg-ivory border-b border-sand sticky top-0 z-30">
+  <header class="no-print bg-midnight/90 backdrop-blur border-b border-brass/15 sticky top-0 z-30">
     <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="devis.html" class="text-sm text-charcoal/70 hover:text-terracotta transition flex items-center gap-1.5"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour au devis</a>
-      <button onclick="window.print()" class="bg-terracotta text-ivory text-sm px-5 py-2.5 rounded-full font-medium hover:bg-terracotta-deep transition flex items-center gap-2"><i data-lucide="printer" class="w-4 h-4"></i> Imprimer</button>
+      <a href="devis.html" class="text-sm text-ivory-dim hover:text-brass-glow transition flex items-center gap-1.5"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour au devis</a>
+      <button onclick="window.print()" class="bg-brass text-midnight text-sm px-5 py-2.5 rounded-full font-semibold hover:bg-brass-glow transition flex items-center gap-2"><i data-lucide="printer" class="w-4 h-4"></i> Imprimer</button>
     </div>
   </header>
 
   <main class="max-w-4xl mx-auto px-6 py-10 md:py-16">
 
     <!-- Titre -->
-    <header class="mb-12 pb-8 border-b border-sand">
-      <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Le cadre légal</p>
-      <h1 class="font-serif text-4xl md:text-5xl mb-4">Conditions Générales de Vente</h1>
-      <p class="text-charcoal/70">Applicables aux prestations de Serenity Belgium · version en vigueur au 7 mai 2026</p>
+    <header class="mb-12 pb-8 border-b border-brass/20">
+      <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Le cadre légal</p>
+      <h1 class="font-serif text-4xl md:text-5xl mb-4 text-ivory">Conditions Générales de Vente</h1>
+      <p class="text-ivory-dim">Applicables aux prestations de Serenity Belgium · version en vigueur au 8 mai 2026</p>
     </header>
 
     <!-- Identité -->
-    <section class="mb-12 bg-ivory-warm rounded-2xl p-6 md:p-8">
-      <p class="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-3">Prestataire</p>
-      <p class="font-serif text-2xl mb-2">Serenity Belgium</p>
-      <ul class="text-sm text-charcoal/80 space-y-1">
-        <li><strong>TVA :</strong> BE 1031.214.423</li>
-        <li><strong>Email :</strong> <a href="mailto:contact.serenitybelgium@gmail.com" class="hover:text-terracotta">contact.serenitybelgium@gmail.com</a></li>
-        <li><strong>Téléphone :</strong> <a href="tel:+32470118222" class="hover:text-terracotta">0470 / 11 82 22</a></li>
-        <li><strong>Marque commerciale :</strong> Serenity Studio</li>
+    <section class="mb-12 bg-ember border border-brass/15 rounded-2xl p-6 md:p-8">
+      <p class="text-brass text-xs tracking-[0.28em] uppercase mb-3">Prestataire</p>
+      <p class="font-serif text-2xl mb-2 text-ivory">Serenity Belgium</p>
+      <ul class="text-sm text-ivory-dim space-y-1">
+        <li><strong class="text-ivory">TVA :</strong> BE 1031.214.423</li>
+        <li><strong class="text-ivory">Email :</strong> <a href="mailto:contact.serenitybelgium@gmail.com" class="text-brass hover:text-brass-glow transition">contact.serenitybelgium@gmail.com</a></li>
+        <li><strong class="text-ivory">Téléphone :</strong> <a href="tel:+32470118222" class="text-brass hover:text-brass-glow transition">0470 / 11 82 22</a></li>
+        <li><strong class="text-ivory">Marque commerciale :</strong> Serenity Studio</li>
       </ul>
     </section>
 
-    <div class="prose-content space-y-10 text-charcoal/85 leading-relaxed">
+    <div class="prose-content space-y-10 text-ivory-dim leading-relaxed">
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">1.</span>Identité du prestataire</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">1.</span>Identité du prestataire</h2>
         <p>Le présent contrat lie Serenity Belgium (ci-après le « Prestataire ») au Client identifié dans le devis accepté. Le Prestataire exerce ses activités sous la marque commerciale Serenity Studio. Toute correspondance officielle est adressée à l'email mentionné ci-dessus.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">2.</span>Définitions</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">2.</span>Définitions</h2>
         <p>Dans les présentes : « <em>Devis</em> » désigne le document chiffré soumis au Client ; « <em>Prestations</em> » désigne l'ensemble des services décrits au Devis ; « <em>Livrables</em> » désigne les supports remis au Client (site web, fichiers sources convenus, accès) ; « <em>Client</em> » désigne le professionnel signataire du Devis.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">3.</span>Objet et champ d'application</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">3.</span>Objet et champ d'application</h2>
         <p>Les présentes CGV régissent toute Prestation de conception, de développement et de maintenance de sites web ou outils digitaux fournie par le Prestataire à un Client professionnel. Elles prévalent sur tout document émanant du Client, sauf accord écrit contraire.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">4.</span>Devis et commande</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">4.</span>Devis et commande</h2>
         <p>Tout Devis émis par le Prestataire est valable <strong>30 jours</strong> à compter de sa date d'émission. La commande est ferme à compter de la signature du Devis par le Client (par voie électronique ou papier) et du paiement de l'acompte prévu à l'article 5.</p>
       </article>
 
       <article id="paiement">
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">5.</span>Prix et paiement</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">5.</span>Prix et paiement</h2>
         <p>Tous les prix sont exprimés <strong>HTVA</strong>. La TVA belge de <strong>21 %</strong> s'applique aux clients établis en Belgique ; les règles d'autoliquidation peuvent s'appliquer aux clients européens assujettis fournissant un numéro de TVA valide.</p>
         <p class="mt-3"><strong>Conditions de paiement :</strong></p>
         <ul class="list-disc pl-6 mt-2 space-y-1">
@@ -101,75 +106,75 @@
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">6.</span>Délais d'exécution</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">6.</span>Délais d'exécution</h2>
         <p>Les délais indicatifs sont mentionnés au Devis et courent à compter de la réception de l'acompte et des contenus nécessaires (textes, photos, accès techniques). Tout retard imputable au Client (validation, fourniture de contenus) suspend le délai sans indemnité. Sauf clause contraire, les délais sont indicatifs et leur dépassement raisonnable ne peut donner lieu ni à indemnité ni à résiliation.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">7.</span>Obligations du Client</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">7.</span>Obligations du Client</h2>
         <p>Le Client s'engage à fournir, dans les délais convenus, tous les éléments nécessaires à la bonne exécution des Prestations : contenus rédactionnels, photographies, identifiants techniques, validation des étapes intermédiaires. Le Client garantit qu'il dispose des droits de reproduction et de communication au public sur tout contenu qu'il transmet au Prestataire et le décharge de toute responsabilité à cet égard.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">8.</span>Obligations du Prestataire</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">8.</span>Obligations du Prestataire</h2>
         <p>Le Prestataire s'engage à exécuter les Prestations selon les règles de l'art et avec diligence. Il s'agit d'une <strong>obligation de moyens</strong>, le Prestataire ne pouvant être tenu d'un résultat dépendant de facteurs extérieurs (référencement naturel, performances commerciales, audience). Le Prestataire respecte la confidentialité des informations qui lui sont communiquées.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">9.</span>Propriété intellectuelle</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">9.</span>Propriété intellectuelle</h2>
         <p>Sauf disposition contraire du Devis, le Prestataire cède au Client, après paiement intégral du prix, les droits d'utilisation, de reproduction et de représentation publique des Livrables, dans le cadre de l'activité professionnelle du Client. Les outils, frameworks, librairies tierces et méthodologies du Prestataire restent sa propriété exclusive. Le Prestataire conserve le droit de mentionner le Client dans son portfolio, sauf opposition écrite.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">10.</span>Hébergement et maintenance</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">10.</span>Hébergement et maintenance</h2>
         <p>L'hébergement et la maintenance ne sont inclus que si expressément prévus au Devis. Le Prestataire fait appel à des sous-traitants (Vercel, GitHub, OVH ou équivalents) dont les conditions d'usage sont opposables. Toute interruption de service liée à un tiers ou à une cause extérieure n'engage pas la responsabilité du Prestataire.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">11.</span>Données personnelles (RGPD)</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">11.</span>Données personnelles (RGPD)</h2>
         <p>Le Prestataire respecte le règlement (UE) 2016/679 (RGPD). Les données personnelles du Client (identité, contacts) sont traitées aux seules fins d'exécution du contrat et conservées pendant la durée légale. Lorsque le Prestataire traite des données personnelles pour le compte du Client (sous-traitance), un accord spécifique de traitement est conclu sur demande. Le Client reste responsable de la conformité de son site (mentions légales, politique de confidentialité, gestion du consentement cookies) sauf prestation contraire.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">12.</span>Confidentialité</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">12.</span>Confidentialité</h2>
         <p>Chaque partie s'engage à conserver confidentielles toutes informations commerciales, techniques ou stratégiques transmises dans le cadre des Prestations, pendant toute la durée du contrat et pendant les <strong>3 années</strong> suivant son terme.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">13.</span>Modifications et avenants</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">13.</span>Modifications et avenants</h2>
         <p>Toute demande de modification hors du périmètre initial décrit au Devis fait l'objet d'un avenant chiffré au tarif horaire de <strong>75 € HTVA / heure</strong>. Aucun travail hors périmètre n'est entrepris sans accord écrit préalable du Client.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">14.</span>Résiliation</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">14.</span>Résiliation</h2>
         <p>En cas de manquement grave de l'une des parties à ses obligations, l'autre partie peut résilier le contrat par lettre recommandée, après mise en demeure restée sans effet pendant <strong>15 jours</strong>. En cas de résiliation aux torts du Client, le Prestataire conserve l'acompte versé et facture le travail réalisé jusqu'à la date de rupture, sans préjudice de dommages et intérêts éventuels.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">15.</span>Force majeure</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">15.</span>Force majeure</h2>
         <p>Aucune des parties ne peut être tenue responsable d'un manquement résultant d'un cas de force majeure au sens de l'article 5.226 du Code civil belge (catastrophe, panne d'infrastructure tierce majeure, mesure administrative, conflit, pandémie). La partie empêchée notifie l'autre dans les meilleurs délais.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">16.</span>Limitation de responsabilité</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">16.</span>Limitation de responsabilité</h2>
         <p>La responsabilité du Prestataire, toutes causes confondues, est limitée au montant total HTVA effectivement payé par le Client au titre des Prestations concernées par le litige. Le Prestataire ne saurait être tenu responsable des dommages indirects, perte de clientèle, perte de chiffre d'affaires ou perte de données.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">17.</span>Litiges et juridiction</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">17.</span>Litiges et juridiction</h2>
         <p>En cas de litige, les parties s'efforcent de trouver une solution amiable. À défaut, les tribunaux belges du ressort du siège du Prestataire sont seuls compétents, sauf disposition légale impérative contraire.</p>
       </article>
 
       <article>
-        <h2 class="font-serif text-2xl mb-3 text-charcoal"><span class="text-terracotta mr-3">18.</span>Loi applicable</h2>
+        <h2 class="font-serif text-2xl mb-3 text-ivory"><span class="text-brass mr-3">18.</span>Loi applicable</h2>
         <p>Les présentes CGV sont soumises au <strong>droit belge</strong>. Toute disposition qui s'avérerait nulle ou inapplicable n'affecte pas la validité des autres clauses.</p>
       </article>
 
     </div>
 
     <!-- Pied -->
-    <footer class="mt-16 pt-8 border-t border-sand text-sm text-charcoal/60">
-      <p class="mb-2">Pour toute question concernant ces CGV, contactez-nous à <a href="mailto:contact.serenitybelgium@gmail.com" class="text-terracotta hover:underline">contact.serenitybelgium@gmail.com</a>.</p>
+    <footer class="mt-16 pt-8 border-t border-brass/15 text-sm text-ivory-dim">
+      <p class="mb-2">Pour toute question concernant ces CGV, contactez-nous à <a href="mailto:contact.serenitybelgium@gmail.com" class="text-brass hover:text-brass-glow transition">contact.serenitybelgium@gmail.com</a>.</p>
       <p>© 2026 Serenity Belgium · TVA BE 1031.214.423</p>
     </footer>
 
